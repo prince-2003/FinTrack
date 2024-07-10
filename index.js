@@ -1,6 +1,22 @@
 $(document).ready(function() {
+    
+    var topMenu = $(".links"),
+        topMenuHeight = topMenu.outerHeight() + 15,
+
+        menuItems = topMenu.find("a"),
+
+        scrollItems = menuItems.map(function() {
+            var item = $($(this).attr("href"));
+            if (item.length) {
+                return item;
+            }
+        });
+
+
     $(window).scroll(function() {
         var scroll = $(window).scrollTop();
+
+
         if (scroll >= 150) {
             $(".navbar_bs").removeClass("navbar_bs").addClass("navbar_as");
             $(".logo").removeClass("logo").addClass("logo_as");
@@ -14,14 +30,20 @@ $(document).ready(function() {
             $(".bt_as").removeClass("bt_as").addClass("bt");
             $("body").css("background-color", " #001d21");
         }
-        $('section').each(function() {
-            var sectionTop = $(this).offset().top;
-            var sectionId = $(this).attr('id');
 
-            if (scroll >= sectionTop && scroll < sectionTop + $(this).outerHeight()) {
-                $('.links a').removeClass('active');
-                $('.links a[href="#' + sectionId + '"]').addClass('active');
-            }
+
+        var fromTop = $(this).scrollTop() + topMenuHeight;
+
+
+        var cur = scrollItems.map(function() {
+            if ($(this).offset().top <= fromTop)
+                return this;
         });
+        cur = cur[cur.length - 1];
+        var id = cur && cur.length ? cur[0].id : "";
+
+        if (id) {
+            menuItems.removeClass("active").filter("[href='#" + id + "']").addClass("active");
+        }
     });
 });
