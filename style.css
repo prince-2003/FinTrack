@@ -69,16 +69,16 @@ button:hover {
 }
 
 .navbar_as {
-  position: sticky;
-  top: 42px; /* Adjust as necessary */
+  position: fixed;
+  top: 42px;
   background-color: radial-gradient(#001d21 0%, #001d21 100%);
   padding: 1px;
   border-radius: 25px;
   width: 610px;
   height: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex; /* Changed from inline-flex to flex */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -88,7 +88,7 @@ button:hover {
     rgba(255, 255, 255, 0) 100%
   );
   backdrop-filter: blur(21px);
-  z-index: 999; /* Ensure this is higher than other content */
+  z-index: 999;
 }
 
 .links {
@@ -227,7 +227,7 @@ button:hover {
   row-gap: 49px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 174px;
+  margin-top: 245px;
 }
 .fcards {
   border-radius: 16px;
@@ -252,4 +252,78 @@ button:hover {
   margin-top: 49px;
   margin-left: auto;
   margin-right: auto;
+}
+.ptxt {
+  color: #fff;
+
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 37.195px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 199.18px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ptxt.description {
+  width: 929px;
+  margin-top: 34.41px;
+  font-size: 22.615px;
+  font-weight: 500;
+}
+.price_cards {
+  display: flex;
+  width: 1119px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 34px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pcard {
+  width: 297.026px;
+height: 415.836px;
+  border-radius: 19.01px;
+  background: linear-gradient(
+    153deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(24.950178146362305px);
+}
+.pcard:hover{
+  width: 333.857px;
+height: 467.4px;
+}
+.demo{
+  margin-top: 79.71px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  height: 73.77px;
+  border-radius: 36.885px;
+background: linear-gradient(153deg, rgba(133, 236, 104, 0.50) 0%, rgba(133, 236, 104, 0.00) 100%);
+backdrop-filter: blur(30.983606338500977px);
+margin-left: auto;
+  margin-right: auto;
+
+}
+.book{
+  width: 153.447px;
+height: 44.003px;
+font-size: 13.539px;
+font-weight: 800;
+}
+.demo_txt{
+  color: #FFF;
+
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22.615px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 25px;
 }
