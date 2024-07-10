@@ -13,8 +13,8 @@ a:hover {
   color: #85ec68;
   cursor: pointer;
 }
-a.active{
-    color:#85ec68
+a.active {
+  color: #85ec68;
 }
 
 button {
@@ -69,29 +69,27 @@ button:hover {
 }
 
 .navbar_as {
-    position: sticky;
-    top: 42px; /* Adjust as necessary */
-    background-color: radial-gradient(#001d21 0%, #001d21 100%);
-    padding: 1px;
-    border-radius: 25px;
-    width: 610px;
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex; /* Changed from inline-flex to flex */
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    background: linear-gradient(
-      153deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    backdrop-filter: blur(21px);
-    z-index: 999; /* Ensure this is higher than other content */
-  }
-  
-  
+  position: sticky;
+  top: 42px; /* Adjust as necessary */
+  background-color: radial-gradient(#001d21 0%, #001d21 100%);
+  padding: 1px;
+  border-radius: 25px;
+  width: 610px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex; /* Changed from inline-flex to flex */
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(
+    153deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(21px);
+  z-index: 999; /* Ensure this is higher than other content */
+}
 
 .links {
   display: flex;
@@ -217,4 +215,41 @@ button:hover {
   left: 0;
   right: 0;
   margin: auto;
+}
+.feature_cards {
+  display: flex;
+  width: 1065px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 84px;
+  row-gap: 49px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 174px;
+}
+.fcards {
+  border-radius: 16px;
+  width: 299px;
+  height: 182px;
+  background: linear-gradient(
+    153deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(21px);
+}
+.qt {
+  width: 908px;
+  color: #fff;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 49px;
+  margin-left: auto;
+  margin-right: auto;
 }
