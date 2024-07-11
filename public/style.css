@@ -236,7 +236,6 @@ button:hover,
   flex-flow: row wrap;
   gap: 84px;
   row-gap: 49px;
-  margin-top: 245px;
 }
 
 .fcards,
@@ -322,7 +321,6 @@ button:hover,
 
 .ptxt {
   font-size: 37.195px;
-  margin-top: 199.18px;
 }
 
 #footer {
