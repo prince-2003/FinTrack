@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $('.login').on('click', function() {
+        window.location.href = "/dashboard";
+    });
     
     var topMenu = $(".links"),
         topMenuHeight = topMenu.outerHeight() + 15,
