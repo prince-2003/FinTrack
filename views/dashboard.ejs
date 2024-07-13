@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style_dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div class="sidebar">
+        <img src="src/logo.svg" >
+        <div class="links">
+        <a href="#dashboard"><img src="src/overview.svg" class="overview" data-hover-img="src/overview_bg.svg">Overview</a>
+        <a href="#"><img src="src/settings.png" class="overview" data-hover-img="src/settings_bg.svg">Settings</a>
+        <a href="#"><img src="src/logout.svg" class="overview" data-hover-img="src/logout_bg.svg">Logout</a></div>
+    </div>  
+    <section id="dashboard" >
+        <h1 class="heading"> Dashboard</h1>
+        <h1 class="overview_txt">Overview</h1>
+        <div class="overview">
+            
+            <div class="card balance"> <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> <br>Balance</div>
+            <div class="card income"> <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png" ><br>Income</div>
+            <div class="card expenses"> <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png"><br>Expenses</div>
+            <div class="card savings"> <img src="src/Money Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png" ><br>Savings</div>
+            <div class="lg_card all_expenses">All Expenses</div>
+            <div class="large-card transaction">Transaction History</div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="index_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  background-color: #001d21;
+  display: flex;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar {
+  width: 247px;
+  height: 100vh;
+  padding: 21px 17.5px 0 25px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #064c4e;
+  position: sticky;
+}
+
+.sidebar .links {
+  margin-top: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sidebar .links a {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  line-height: 47px;
+  width: 204px;
+  height: 47px;
+  border-radius: 10px;
+  color: #405052;
+  text-decoration: none;
+  font-size: 22.615px;
+  font-weight: 500;
+}
+
+.sidebar img {
+  width: 116px;
+  margin-left: 20px;
+}
+
+.sidebar .links a img {
+  width: 27px;
+  margin-right: 9px;
+  padding: 0;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background-color: #3ccf4e;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 800;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+#dashboard {
+  display: block;
+  width: 100%;
+}
+
+.heading,
+.overview_txt {
+  color: #405052;
+  display: block;
+  font-size: 26.305px;
+  font-weight: 600;
+  padding-left: 26.5px;
+}
+.overview_txt {
+  color: #D1D2D2;
+}
+
+.heading {
+  border-bottom: 1px solid #064c4e;
+  font-size: 29.077px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+
+.overview {
+  padding-left: 26.5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 19.17px;
+}
+
+.card {
+  width: 268.222px;
+  height: 191.82px;
+  background: #282f35;
+  color: #e5e6e7;
+  backdrop-filter: blur(35.65px);
+  border-radius: 8.488px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 22.615px;
+  font-weight: 500;
+}
+
+.card img {
+  margin-bottom: 21px;
+}
+
+.card:hover {
+  background-color: #bafc59;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 800;
+}
+
+.lg_card {
+  grid-column: span 2;
+  border-radius: 16px;
+  background: #282f35;
+  color: #d1d2d2;
+  backdrop-filter: blur(21px);
+  text-align: left;
+  margin-right: 20px;
+  height: 260px;
+  padding: 20px;
+  font-size: 26.305px;
+  font-weight: 600;
+}
+
+.large-card {
+  grid-column: span 4;
+  border-radius: 16px;
+  color: #d1d2d2;
+  border: 1px solid #064c4e;
+  text-align: left;
+  height: 260px;
+  padding: 20px;
+  font-size: 26.305px;
+  font-weight: 600;
+}
