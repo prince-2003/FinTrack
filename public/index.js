@@ -1,6 +1,9 @@
 $(document).ready(function() {
     $('.login').on('click', function() {
+        // $.get( "/dashboard",function( data ) {
+        //     alert( "Data Loaded: " + data );}); works fine but it cant render the page in the window
         window.location.href = "/dashboard";
+        
     });
     
     var topMenu = $(".links"),

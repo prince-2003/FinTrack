@@ -6,11 +6,11 @@ $(document).ready(function() {
 
     $(this).hover(
         function() {
-            console.log(`Hovering over: ${originalSrc}`);
+            // console.log(`Hovering over: ${originalSrc}`);
             img.attr('src', hoverSrc);
         },
         function() {
-            console.log(`Mouse out: ${originalSrc}`);
+            // console.log(`Mouse out: ${originalSrc}`);
             img.attr('src', originalSrc);
         }
     );
@@ -24,11 +24,11 @@ $(document).ready(function() {
 
       $(this).hover(
           function() {
-              console.log(`Hovering over: ${originalSrc}`);
+            //   console.log(`Hovering over: ${originalSrc}`);
               img.attr('src', hoverSrc);
           },
           function() {
-              console.log(`Mouse out: ${originalSrc}`);
+            //   console.log(`Mouse out: ${originalSrc}`);
               img.attr('src', originalSrc);
           }
       );
