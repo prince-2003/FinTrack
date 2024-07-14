@@ -44,7 +44,6 @@ body {
 .sidebar .links a img {
   width: 27px;
   margin-right: 9px;
-  padding: 0;
 }
 
 .sidebar a.active,
@@ -60,28 +59,30 @@ body {
   padding: 20px;
 }
 
-#overview {
-  display: block;
-  width: 100%;
-}
-
 .heading,
 .overview_txt {
   color: #405052;
-  display: block;
   font-size: 26.305px;
   font-weight: 600;
   padding-left: 26.5px;
 }
+
 .overview_txt {
-  color: #D1D2D2;
+  color: #d1d2d2;
 }
 
 .heading {
-  border-bottom: 1px solid #064c4e;
   font-size: 29.077px;
   padding-top: 21px;
   padding-bottom: 21px;
+  margin: 0;
+}
+
+hr {
+  border: none;
+  width: 1150px;
+  background-color: #064c4e;
+  height: 1px;
   margin: 0;
 }
 
@@ -116,28 +117,122 @@ body {
   font-weight: 800;
 }
 
+.large-card,
 .lg_card {
-  grid-column: span 2;
   border-radius: 16px;
   background: #282f35;
   color: #d1d2d2;
-  backdrop-filter: blur(21px);
-  text-align: left;
-  margin-right: 20px;
-  height: 260px;
   padding: 20px;
   font-size: 26.305px;
   font-weight: 600;
 }
 
+.lg_card {
+  grid-column: span 2;
+  backdrop-filter: blur(21px);
+  text-align: left;
+  margin-right: 20px;
+  height: 260px;
+}
+
 .large-card {
   grid-column: span 4;
-  border-radius: 16px;
-  color: #d1d2d2;
   border: 1px solid #064c4e;
   text-align: left;
   height: 260px;
-  padding: 20px;
+}
+
+.h_setting,
+.user-profile h3,
+.portfolio h3 {
+  color: #d1d2d2;
   font-size: 26.305px;
   font-weight: 600;
+  margin: 0;
+  margin-top: 18px;
+  margin-left: 26.5px;
+  margin-bottom: 11px;
+}
+
+.user-profile hr,
+.portfolio hr {
+  margin-left: 26.5px;
+  width: 1097px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  margin-top: 10px;
+  padding-left: 26.5px;
+  color: #d1d2d2;
+  row-gap: 46px;
+  width: 1080px;
+}
+
+.form-group label {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.form-group label div {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.form-group input {
+  width: 608px;
+  height: 47px;
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #064c4e;
+  color: #d1d2d2;
+}
+
+.form-group input::placeholder {
+  padding-left: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: right;
+  gap: 38px;
+  grid-column: 2;
+}
+
+.form-actions button {
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+  background: none;
+  border: 1px solid #85ec68;
+  font-size: 19px;
+  font-weight: 600;
+  color: #85ec68;
+}
+
+.form-actions button:hover {
+  background-color: #85ec68;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 600;
+}
+
+.profile_photo {
+  display: flex;
+  margin-top: 18px;
+  padding-left: 26.5px;
+  color: #d1d2d2;
+  gap: 27px;
+  margin-bottom: 61px;
+  align-items: center;
+}
+
+.h_name{
+  font-weight: 600;
+  margin: 0;
+}
+.h_username {
+  margin: 0;
+  font-weight: 300;
 }

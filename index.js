@@ -17,5 +17,8 @@ app.get('/', function(req, res ){
     res.render("index.ejs");   
 });
 app.get('/dashboard', function(req, res ){
-    res.render("dashboard.ejs");   
+    res.render("overview.ejs");   
+});
+app.get('/dashboard/settings', function(req, res ){
+    res.render("settings.ejs");   
 });

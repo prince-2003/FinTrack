@@ -1,20 +1,41 @@
 $(document).ready(function() {
-  $('.links a').each(function() {
-    const img = $(this).find('img');;
-    const originalSrc = img.attr('src');
-    const hoverSrc = img.data('hover-img');
+    $('section').each(function() {
+        var sectionId = $(this).attr('id');
+        var topMenuHeight = $(this).outerHeight() + 15;
+        $(".sidebar").css("height", topMenuHeight);
+    
+        var links = $('.links a');
+    
+        links.each(function() {
+            var link = $(this);
+            var img = link.find('img');
+            var linkText = link.text().trim();
+            var originalSrc = img.attr('src');
+            var hoverSrc = img.data('hover-img');
+    
+            link.hover(
+                function() {
+                    img.attr('src', hoverSrc);
+                },
+                function() {
+                    if (!link.hasClass('active')) {
+                        img.attr('src', originalSrc);
+                    }
+                }
+            );
+    
+            if (linkText === sectionId) {
+                link.addClass('active');
+                img.attr('src', hoverSrc);
+            } else {
+                link.removeClass('active');
+                img.attr('src', originalSrc);
+            }
+        });
+    });
+    
+    
 
-    $(this).hover(
-        function() {
-            // console.log(`Hovering over: ${originalSrc}`);
-            img.attr('src', hoverSrc);
-        },
-        function() {
-            // console.log(`Mouse out: ${originalSrc}`);
-            img.attr('src', originalSrc);
-        }
-    );
-});
 
 
   $('.card').each(function() {
@@ -24,11 +45,11 @@ $(document).ready(function() {
 
       $(this).hover(
           function() {
-            //   console.log(`Hovering over: ${originalSrc}`);
+              console.log(`Hovering over: ${originalSrc}`);
               img.attr('src', hoverSrc);
           },
           function() {
-            //   console.log(`Mouse out: ${originalSrc}`);
+              console.log(`Mouse out: ${originalSrc}`);
               img.attr('src', originalSrc);
           }
       );
