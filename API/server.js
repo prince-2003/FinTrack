@@ -56,9 +56,11 @@ app.get('/', (req, res) => {
             res.status(500).send("Error fetching user info");
         } else {
             console.log("Query result:", result.rows);
-            const modifiedResult = result.rows.map(row => {
-                row.savings = row.income *row.savings * 0.01; 
-            });
+            const modifiedResult = result.rows.map(row => ({
+                ...row,
+                savings: row.income * row.savings * 0.01
+            }));
+            
             res.json(modifiedResult);
         }
     });
