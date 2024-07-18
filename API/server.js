@@ -3,13 +3,23 @@ import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import pg from "pg";
+import dotenv from "dotenv";
 
+dotenv.config();
+
+// const db = new pg.Client({
+//     user: "postgres",
+//     host: "localhost",
+//     database: "FinTrack",
+//     password: "prince123",
+//     port: 5433,
+// });
 const db = new pg.Client({
-    user: "postgres",
-    host: "localhost",
-    database: "FinTrack",
-    password: "prince123",
-    port: 5433,
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT,
 });
 
 const __filename = fileURLToPath(import.meta.url);
@@ -44,7 +54,7 @@ app.get('/', (req, res) => {
             portfolio.expense_pie,
             portfolio.balance,
             portfolio.income,
-            portfolio.savings
+            portfolio.savings_amount
         FROM user_info
         JOIN portfolio ON user_info.userId = portfolio.userId
         WHERE user_info.userId = $1;
@@ -55,13 +65,8 @@ app.get('/', (req, res) => {
             console.error("Error executing query", err);
             res.status(500).send("Error fetching user info");
         } else {
-            console.log("Query result:", result.rows);
-            const modifiedResult = result.rows.map(row => ({
-                ...row,
-                savings: row.income * row.savings * 0.01
-            }));
-            
-            res.json(modifiedResult);
+            console.log("Query result:", result.rows);     
+            res.json(result.rows);
         }
     });
 });
