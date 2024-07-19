@@ -1,16 +1,100 @@
 <%- include('header.ejs') %> 
-    <section id="Overview" >
-        <h1 class="heading"> Dashboard</h1>
-        <hr>
-        <h1 class="overview_txt">Overview</h1>
-        <div class="overview">
-            
-            <div class="card balance"> <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> <br>Balance</div>
-            <div class="card income"> <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png" ><br>Income</div>
-            <div class="card expenses"> <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png"><br>Expenses</div>
-            <div class="card savings"> <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png" ><br>Savings</div>
-            <div class="lg_card all_expenses">All Expenses</div>
-            <div class="large-card transaction">Transaction History</div>
+<section id="Overview">
+    <h1 class="heading">Dashboard</h1>
+    <hr>
+    <h1 class="overview_txt">Overview</h1>
+    <div class="overview">
+        <% if (locals.balance && locals.income && locals.expenses && locals.savings) { %>
+            <div class="card balance"> 
+                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+                <br>Balance <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 <%= balance %></div>
+            </div>
+            <div class="card income"> 
+                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+                <br>Income<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 <%= income %></div>
+            </div>
+            <div class="card expenses"> 
+                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+                <br>Expenses<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 <%= expenses %></div>
+            </div>
+            <div class="card savings"> 
+                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+                <br>Savings<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 <%= savings %></div>
+            </div>
+        <% } else { %>
+            <div class="card balance"> 
+                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+                <br>Balance <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 NIL</div>
+            </div>
+            <div class="card income"> 
+                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+                <br>Income<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 NIL</div>
+            </div>
+            <div class="card expenses"> 
+                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+                <br>Expenses<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 NIL</div>
+            </div>
+            <div class="card savings"> 
+                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+                <br>Savings<div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377 NIL</div>
+            </div>
+        <% } %>
+        <div class="lg_card all_expenses">All Expenses</div>
+        <div class="large-card transaction">
+            Transaction History<div class="edit" id="openModal" style="position: absolute; top: 20px; right: 20px;">+</div>
+            <div class="transactions">
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Transaction</h2>
+                        <form id="transactionForm" method="post" action="/add_transaction" >
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" name="amount" required>
+                            
+                            <label for="type">Type:</label>
+                            <input type="text" id="type" name="type" required>
+                            
+                            <label for="category">Category:</label>
+                            <input type="text" id="category" name="category" required>
+                            
+                            <button type="submit">Add Transaction</button>
+                        </form>
+                    </div>
+                </div>
+        
+                <% if (transactions.length > 0) { %>
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% transactions.forEach(function(transaction) { %>
+                                <tr>
+                                    <td>&#8377; <%= transaction.amount %></td>
+                                    <td><%= transaction.type %></td>
+                                    <td><%= transaction.category %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <p>No transactions found</p>
+                <% } %>
+            </div>
         </div>
-    </section>
-    <%- include('footer.ejs') %>
+        
+    </div>
+</section>
+<%- include('footer.ejs') %>
