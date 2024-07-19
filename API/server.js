@@ -7,13 +7,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// const db = new pg.Client({
-//     user: "postgres",
-//     host: "localhost",
-//     database: "FinTrack",
-//     password: "prince123",
-//     port: 5433,
-// });
 const db = new pg.Client({
     user: process.env.USER,
     host: process.env.HOST,
