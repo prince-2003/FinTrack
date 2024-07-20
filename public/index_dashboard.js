@@ -87,14 +87,6 @@ $(document).ready(function() {
         }
     }
 
-    // Optional: Handle form submission here
-    document.getElementById("transactionForm").onsubmit = function(event) {
-        event.preventDefault();
-        // Handle form data submission (e.g., via AJAX or other methods)
-        // Close the modal after submission
-        modal.style.display = "none";
-    }
-
 
   $('.card').each(function() {
       const img = $(this).find('.card-img');

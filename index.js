@@ -3,34 +3,33 @@ import path from "path";
 import { fileURLToPath } from "url";
 import axios from "axios";
 import bodyParser from "body-parser";
-import { type } from "os";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 4000;
-const url = "http://localhost:3000";
-app.use(bodyParser.urlencoded({ extended: true }));
+const apiUrl = "http://localhost:3000";
 
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.listen(port, ()=>{
-    console.log(`Server is Active ${port}`);
+
+// Routes
+app.get('/', (req, res) => {
+    res.render("index.ejs");
 });
 
 app.get('/dashboard', async (req, res) => {
     try {
-        // Fetch data from both endpoints
         const [userInfoResponse, transactionsResponse] = await Promise.all([
-            axios.get(`${url}/`),
-            axios.get(`${url}/transactions`)
+            axios.get(`${apiUrl}/`),
+            axios.get(`${apiUrl}/transactions`)
         ]);
 
-        // Combine the results
         const userInfo = userInfoResponse.data[0];
         const transactions = transactionsResponse.data;
 
-        // Render the template with the combined data
         res.render("overview.ejs", {
             balance: userInfo.balance,
             income: userInfo.income,
@@ -39,26 +38,18 @@ app.get('/dashboard', async (req, res) => {
             transactions: transactions
         });
     } catch (error) {
-        console.error("Error fetching user info", error);
+        console.error("Error fetching user info:", error.message || error);
         res.status(500).send("Error fetching user info");
     }
-});
-app.get('/', function(req, res ){
-       res.render("index.ejs");
 });
 
 app.post('/add_transaction', async (req, res) => {
     try {
         const { type, category, amount } = req.body;
-        console.log(req.body);
         const userId = 'prince1398';
-        const response = await axios.post(`${url}/add_transaction`, {
-            userId: userId,
-            type: type,
-            category: category,
-            amount: amount
-        });
-        res.status(200).json(response.data);
+
+        await axios.post(`${apiUrl}/add_transaction`, { userId, type, category, amount });
+        res.redirect('/dashboard');
     } catch (error) {
         console.error("Error adding transaction:", error.message || error);
         res.status(500).send("Error adding transaction");
@@ -69,17 +60,58 @@ app.post('/update_portfolio', async (req, res) => {
     try {
         const { fullincome, savings } = req.body;
         const userId = 'prince1398';
-     await axios.put(`${url}/update_portfolio`, {
-            userId: userId,
-            income: fullincome, savings: savings
-        });
-        res.redirect('/dashboard');
+
+        const payload = { userId };
+        if (fullincome) payload.income = fullincome;
+        if (savings) payload.savings = savings;
+
+        if (Object.keys(payload).length > 1) {
+            await axios.put(`${apiUrl}/update_portfolio`, payload);
+            res.redirect('/dashboard');
+        } else {
+            res.status(400).send("No valid fields to update");
+        }
     } catch (error) {
         console.error("Error updating portfolio:", error.message || error);
         res.status(500).send("Error updating portfolio");
     }
 });
 
-app.get('/dashboard/settings', function(req, res ){
-    res.render("settings.ejs");   
+app.post('/update_user', async (req, res) => {
+    try {
+        const { fullname, userid } = req.body;
+
+        console.log("Request body:", req.body);
+
+        const response = await axios.put(`${apiUrl}/update_user`, {
+            name: fullname,
+            userId: userid
+        });
+
+        console.log("API response:", response.data);
+        res.redirect('/dashboard/settings');
+    } catch (error) {
+        console.error("Error updating user:", error.message || error);
+        res.status(500).send("Error updating user");
+    }
+});
+
+app.get('/dashboard/settings', async (req, res) => {
+    try {
+        const result = await axios.get(`${apiUrl}/`);
+        console.log("API Response Data:", result.data);
+
+        res.render("settings.ejs", {
+            name: result.data[0].fullname,
+            user: result.data[0].userid
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// Start Server
+app.listen(port, () => {
+    console.log(`Server is active on port ${port}`);
 });

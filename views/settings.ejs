@@ -6,24 +6,32 @@
       <div class="profile_photo">
         <img src="/src/profile.svg" alt="profile" />
         <div class="profile_info">
-          <h2 class="h_name">John Doe</h2>
-          <h3 class="h_username">@johndoe</h3>
-        </div>
+          <% if (locals.name && locals.user) { %>
+            <h2 class="h_name"><%= name %></h2>
+            <h3 class="h_username">@ <%= user %></h3>
+          <% } else {%>
+          <h2 class="h_name">testname</h2>
+            <h3 class="h_username">@testuserid</h3>
+          <% } %>
+          
+      </div>
+      
       </div>
 
       <div class="user-profile">
         <h3>User Profile</h3>
         <hr />
-        <form class="form-group" >
+        <form class="form-group" method="post" action="/update_user">
           <label for="full-name"
             >Full Name<br />
             <div>This will be displayed on your profile</div></label
           >
           <input
             type="text"
-            id="full-name"
+            id="fullname"
+            name="fullname"
             placeholder="Enter Your Full Name"
-            required
+            
             title="Enter your full name as you would like it to appear on your profile"
           />
           <label for="username"
@@ -32,10 +40,11 @@
           >
           <input
             type="text"
-            id="username"
-            placeholder="Enter Your Username"
+            id="userid"
+            name="userid"
+            placeholder="Enter Your Userid"
             required
-            title="Choose a unique username for logging in"
+            title="Choose a unique userid for logging in"
           />
           <div class="form-actions">
             <button type="submit" class="save">Save Changes</button>
