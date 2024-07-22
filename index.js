@@ -187,6 +187,27 @@ app.get('/dashboard/settings', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+app.get('/chart', async (req, res) => {
+    try {
+        const userId = req.cookies.userId;  // Get userId from cookies
+        if (!userId) {
+            return res.status(400).send("User ID is required");  // Handle case where userId is missing
+        }
+
+        // Fetch data from the API
+        const result = await axios.get(`${apiUrl}/chart`, { params: { userId } });
+        console.log("API Response Data:", result.data);
+
+        // Send the API response data back to the client
+        res.status(200).json(result.data);
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
+
+        // Send a generic error message to the client
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 // Start the server
 app.listen(port, () => {

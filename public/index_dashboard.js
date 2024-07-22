@@ -1,12 +1,64 @@
 $(document).ready(function() {
+    function fetchDataAndRenderChart() {
+        $.ajax({
+            url: '/chart',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                const categories = data.map(item => item.category);
+                console.log('Data:', categories);
+                const seriesData = data.map(item => item.total);
+                console.log('Data:', seriesData);
+                var options = {
+                    chart: {
+                        type: 'pie',
+                        height: 225
+                    },
+                    labels: categories,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            colors: ['#fff'], 
+                            fontSize: '10px', 
+                            fontFamily: 'Montserrat, sans-serif' 
+                        }
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    legend: {
+                        labels: {
+                            colors: '#fff', 
+                            fontSize: '14px', 
+                            fontFamily: 'Montserrat, sans-serif'
+                        }
+                    },
+                    colors: ['#85ec68', '#ff5722', '#2196f3', '#ffc107', '#9c27b0'] // Example colors for pie slices
+                };
+                
+                var chart = new ApexCharts(document.querySelector("#chart"), { ...options, series: seriesData });
+                chart.render();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+    fetchDataAndRenderChart();
+
+    // Handle sidebar link hover and active state
     $('section').each(function() {
         var sectionId = $(this).attr('id');
         var topMenuHeight = $(this).outerHeight() + 15;
         $(".sidebar").css("height", topMenuHeight);
     
-        var links = $('.links a');
-    
-        links.each(function() {
+        $('.links a').each(function() {
             var link = $(this);
             var img = link.find('img');
             var linkText = link.text().trim();
@@ -33,72 +85,42 @@ $(document).ready(function() {
             }
         });
     });
-    
-    // $.ajax({
-    //     url: 'http://localhost:3000/transactions', // Replace with your actual API endpoint
-    //     method: 'GET',
-    //     dataType: 'json',
-    //     success: function(data) {
-    //         console.log('Data fetched:', data); // Log the fetched data for debugging
-    //         const transactionsDiv = $('#transactions');
-    //         if (data && data.length > 0) {
-    //             data.forEach(transaction => {
-    //                 console.log('Processing transaction:', transaction); // Log each transaction
-    //                 const transactionCard = $('<div>').addClass('transaction-card');
-    //                 transactionCard.html(`
-    //                     <div>Amount: &#8377; ${transaction.amount}</div>
-    //                     <div>Type: ${transaction.type}</div>
-    //                 `);
-    //                 transactionsDiv.append(transactionCard);
-    //             });
-    //         } else {
-    //             console.log('No transactions found'); // Log if no transactions are found
-    //             transactionsDiv.html('<p>No transactions found</p>');
-    //         }
-    //     },
-    //     error: function(error) {
-    //         console.error('Error fetching transactions:', error); // Log error details
-    //         $('#transactions').html('<p>Failed to load transactions</p>');
-    //     }
-    // });
 
-    $(document).ready(function() {
-        var modal = $("#myModal");
-        var btn = $(".open");
-        var span = $(".close");
-    
-        btn.click(function() {
-            modal.show();
-        });
-        span.click(function() {
-            modal.hide();
-        });
-        $(window).click(function(event) {
-            if ($(event.target).is(modal)) {
-                modal.hide();
-            }
-        });
+    // Handle modal functionality
+    var modal = $("#myModal");
+    var btn = $(".open");
+    var span = $(".close");
+
+    btn.click(function() {
+        modal.show();
     });
-    
+    span.click(function() {
+        modal.hide();
+    });
+    $(window).click(function(event) {
+        if ($(event.target).is(modal)) {
+            modal.hide();
+        }
+    });
 
+    // Reset form function
     function resetForm(formId) {
-        document.getElementById(formId).reset();}
+        document.getElementById(formId).reset();
+    }
 
-  $('.card').each(function() {
-      const img = $(this).find('.card-img');
-      const originalSrc = img.attr('src');
-      const hoverSrc = img.data('hover-img');
+    // Handle card hover effect
+    $('.card').each(function() {
+        const img = $(this).find('.card-img');
+        const originalSrc = img.attr('src');
+        const hoverSrc = img.data('hover-img');
 
-      $(this).hover(
-          function() {
-              console.log(`Hovering over: ${originalSrc}`);
-              img.attr('src', hoverSrc);
-          },
-          function() {
-              console.log(`Mouse out: ${originalSrc}`);
-              img.attr('src', originalSrc);
-          }
-      );
-  });
-  
+        $(this).hover(
+            function() {
+                img.attr('src', hoverSrc);
+            },
+            function() {
+                img.attr('src', originalSrc);
+            }
+        );
+    });
 });

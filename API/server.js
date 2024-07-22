@@ -297,6 +297,29 @@ app.put('/update_user', (req, res) => {
     });
 });
 
+app.get('/chart', (req, res) => {
+    const { userId } = req.query;
+    const query = `
+       SELECT 
+    category,
+    SUM(amount) AS total
+FROM transaction_history
+WHERE userId = $1
+AND type = 'debit'
+GROUP BY category;
+
+    `;
+    db.query(query, [userId], (err, result) => {
+        if (err) {
+            console.error("Error executing query", err);
+            res.status(500).send("Error fetching chart data");
+        } else {
+            console.log("Query result:", result.rows);
+            res.json(result.rows);
+        }
+    });
+});
+
 // DELETE request to delete a user
 app.delete('/delete_user', (req, res) => {
     console.log("Request Body:", req.body);
