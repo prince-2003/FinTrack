@@ -294,6 +294,10 @@ line-height: normal;
   border: 1px solid #064c4e;
   color: #d1d2d2;
 }
+.modal-content form select {
+  width: 150px;
+  height: 47px;
+}
 .modal-content form button {
   width: 180px;
   height: 40px;
@@ -321,7 +325,65 @@ line-height: normal;
 
 .open:hover, .open:focus, .close:hover,
 .close:focus {
-  color: #85ec68;;
+  color: #85ec68;
   text-decoration: none;
   cursor: pointer;
 }
+.edit:hover, .edit:focus {
+  color: #002226;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.overview1{
+  color: #d1d2d2;
+  font-size: 40px;
+  font-weight: 800;
+  padding-left: 26.5px;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-table thead {
+  position: sticky;
+  top: 0;
+  background: #282f35;
+  backdrop-filter: blur(21px);
+  color: #4b5657;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.transaction-table th, .transaction-table td {
+  padding: 12px 15px;
+  text-align: left;
+  white-space: nowrap; 
+}
+
+.transaction-table th {
+  font-weight: bold;
+}
+
+.transaction-table tbody tr:hover {
+  background-color: #85ec68;
+  color: #002226;
+  border-radius: 10px;
+}
+
+/* Wrapper for vertical scrolling without scrollbar */
+.table-wrapper {
+  max-height: 250px; 
+  overflow-y: scroll; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+
+.table-wrapper::-webkit-scrollbar { 
+  display: none;  
+}
+

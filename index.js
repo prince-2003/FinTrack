@@ -86,6 +86,7 @@ app.get('/dashboard', async (req, res) => {
 
         // Render the overview page with fetched data
         res.render("overview.ejs", {
+            fullname: userInfo.fullname,
             balance: userInfo.balance,
             income: userInfo.income,
             savings: userInfo.savings_amount,
