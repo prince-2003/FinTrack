@@ -3,7 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import axios from "axios";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
+// Get the current file name and directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,25 +13,77 @@ const app = express();
 const port = 4000;
 const apiUrl = "http://localhost:3000";
 
-// Middleware
+// Middleware setup
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
 
-// Routes
+// Route for rendering the home page
 app.get('/', (req, res) => {
     res.render("index.ejs");
 });
 
+// Route for rendering the login page
+app.get('/login', (req, res) => {
+    res.render("login.ejs");
+});
+
+// Route for registering a new user
+app.post('/register', async (req, res) => {
+    try {
+        const { fullName, userId, email, password } = req.body;
+
+        await axios.post(`${apiUrl}/register`, {
+            fullName: fullName,
+            userId: userId,
+            password: password,
+            email: email
+        });
+
+        res.redirect('/login');
+    } catch (error) {
+        console.error("Error registering user:", error.message || error);
+        res.status(500).send("Error registering user");
+    }
+});
+
+// Route for user login
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        console.log("Request body:", req.body);
+
+        // Authenticate the user with the external API
+        const authResponse = await axios.post(`${apiUrl}/login`, { email, password });
+        console.log("API Response:", authResponse.data);
+
+        // Extract user ID from the auth response
+        const userId = authResponse.data.userId;
+
+        // Set the userId in the cookie
+        res.cookie('userId', userId);
+
+        // Redirect to the dashboard
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error("Error logging in:", error.response ? error.response.data : error.message);
+        res.status(500).send("Error logging in");
+    }
+});
+
+// Route for rendering the dashboard
 app.get('/dashboard', async (req, res) => {
     try {
+        const userId = req.cookies.userId;
         const [userInfoResponse, transactionsResponse] = await Promise.all([
-            axios.get(`${apiUrl}/`),
-            axios.get(`${apiUrl}/transactions`)
+            axios.get(`${apiUrl}/`, { params: { userId } }),
+            axios.get(`${apiUrl}/transactions`, { params: { userId } })
         ]);
 
         const userInfo = userInfoResponse.data[0];
         const transactions = transactionsResponse.data;
 
+        // Render the overview page with fetched data
         res.render("overview.ejs", {
             balance: userInfo.balance,
             income: userInfo.income,
@@ -43,10 +97,12 @@ app.get('/dashboard', async (req, res) => {
     }
 });
 
+// Route for adding a new transaction
 app.post('/add_transaction', async (req, res) => {
     try {
         const { type, category, amount } = req.body;
-        const userId = 'prince1398';
+        const userId = req.cookies.userId;
+        console.log('userId', userId);
 
         await axios.post(`${apiUrl}/add_transaction`, { userId, type, category, amount });
         res.redirect('/dashboard');
@@ -56,10 +112,11 @@ app.post('/add_transaction', async (req, res) => {
     }
 });
 
+// Route for updating user portfolio
 app.post('/update_portfolio', async (req, res) => {
     try {
         const { fullincome, savings } = req.body;
-        const userId = 'prince1398';
+        const userId = req.cookies.userId;
 
         const payload = { userId };
         if (fullincome) payload.income = fullincome;
@@ -77,15 +134,18 @@ app.post('/update_portfolio', async (req, res) => {
     }
 });
 
+// Route for updating user information
 app.post('/update_user', async (req, res) => {
     try {
-        const { fullname, userid } = req.body;
+        const userId = req.cookies.userId;
+        const { fullname, email } = req.body;
 
         console.log("Request body:", req.body);
 
         const response = await axios.put(`${apiUrl}/update_user`, {
             name: fullname,
-            userId: userid
+            email: email,
+            userId: userId
         });
 
         console.log("API response:", response.data);
@@ -96,9 +156,11 @@ app.post('/update_user', async (req, res) => {
     }
 });
 
+// Route for rendering the settings page
 app.get('/dashboard/settings', async (req, res) => {
     try {
-        const result = await axios.get(`${apiUrl}/`);
+        const userId = req.cookies.userId;
+        const result = await axios.get(`${apiUrl}/`, { params: { userId } });
         console.log("API Response Data:", result.data);
 
         res.render("settings.ejs", {
@@ -111,7 +173,7 @@ app.get('/dashboard/settings', async (req, res) => {
     }
 });
 
-// Start Server
+// Start the server
 app.listen(port, () => {
     console.log(`Server is active on port ${port}`);
 });

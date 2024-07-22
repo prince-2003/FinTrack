@@ -4,7 +4,9 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 
+const saltRounds = 10;
 dotenv.config();
 
 const db = new pg.Client({
@@ -28,18 +30,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Connect to database
 db.connect()
-    .then(() => {
-        console.log("Connected to database");
-    })
-    .catch(err => {
-        console.error("Error connecting to database", err);
-    });
+    .then(() => console.log("Connected to database"))
+    .catch(err => console.error("Error connecting to database", err));
 
 // Routes
-// GET request
-app.get('/', (req, res) => {
-    const userId = 'prince1398';
 
+// GET request to fetch user info
+app.get('/', (req, res) => {
+    const { userId } = req.query;
     const query = `
         SELECT 
             user_info.userId,
@@ -52,28 +50,23 @@ app.get('/', (req, res) => {
         JOIN portfolio ON user_info.userId = portfolio.userId
         WHERE user_info.userId = $1;
     `;
-
     db.query(query, [userId], (err, result) => {
         if (err) {
             console.error("Error executing query", err);
             res.status(500).send("Error fetching user info");
         } else {
-            console.log("Query result:", result.rows);     
+            console.log("Query result:", result.rows);
             res.json(result.rows);
         }
     });
 });
 
+// GET request to fetch transactions
+app.get('/transactions', (req, res) => {
+    const { userId } = req.query;
+    if (!userId) return res.status(400).send("userId is required");
 
-app.get(`/transactions`, (req, res) => {
-    const userId = 'prince1398';
-
-    const query = `
-        SELECT *
-        FROM transaction_history
-        WHERE userId = $1
-    `;
-
+    const query = `SELECT * FROM transaction_history WHERE userId = $1`;
     db.query(query, [userId], (err, result) => {
         if (err) {
             console.error("Error executing query", err);
@@ -85,35 +78,71 @@ app.get(`/transactions`, (req, res) => {
     });
 });
 
-// POST requests
-app.post('/register', (req, res) => {
+// POST request to register a new user
+app.post('/register', async (req, res) => {
+    const { fullName, userId, email, password } = req.body;
     console.log("Request Body:", req.body);
 
-    const { userId, fullName } = req.body;
+    try {
+        const checkResult = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
+        if (checkResult.rows.length > 0) return res.redirect("/login");
 
-    const query = `
-        INSERT INTO user_info (userId, fullName)
-        VALUES ($1, $2)
-        RETURNING *
-    `;
-    const values = [userId, fullName];
+        bcrypt.hash(password, saltRounds, async (err, hash) => {
+            if (err) {
+                console.error("Error hashing password:", err);
+                return res.status(500).json({ error: "Error hashing password" });
+            }
 
-    console.log("Inserting user:", values);
+            try {
+                const userInfoResult = await db.query(
+                    "INSERT INTO user_info (email, password, userId, fullName) VALUES ($1, $2, $3, $4) RETURNING *",
+                    [email, hash, userId, fullName]
+                );
 
-    db.query(query, values, (err, result) => {
-        if (err) {
-            console.error("Error executing query", err);
-            res.status(500).json({ error: "Error inserting user" });
-        } else {
-            console.log("Inserted user:", result.rows[0]);
-            res.status(201).json(result.rows[0]);
-        }
-    });
+                res.status(201).json({
+                    id: userInfoResult.rows[0].id,
+                    email: userInfoResult.rows[0].email,
+                    userId: userInfoResult.rows[0].userId,
+                    fullName: userInfoResult.rows[0].fullName
+                });
+            } catch (dbErr) {
+                console.error("Error inserting user into database:", dbErr);
+                res.status(500).json({ error: "Database error" });
+            }
+        });
+    } catch (err) {
+        console.error("Error checking existing user:", err);
+        res.status(500).json({ error: "Database error" });
+    }
 });
 
+// POST request for user login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const checkResult = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
+        if (checkResult.rows.length > 0) {
+            const storedPassword = checkResult.rows[0].password;
+            bcrypt.compare(password, storedPassword, (err, result) => {
+                if (err) return res.status(500).send("Internal Server Error");
+                if (result) {
+                    res.status(200).json({ userId: checkResult.rows[0].userid });
+                } else {
+                    res.status(401).send("Incorrect Password");
+                }
+            });
+        } else {
+            res.status(404).send("User not found");
+        }
+    } catch (err) {
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// POST request to add a portfolio
 app.post('/portfolio', (req, res) => {
     console.log("Request Body:", req.body);
-
     const { userId, income, savings } = req.body;
 
     const query = `
@@ -122,7 +151,6 @@ app.post('/portfolio', (req, res) => {
         RETURNING *
     `;
     const values = [userId, income, savings];
-
     console.log("Inserting portfolio:", values);
 
     db.query(query, values, (err, result) => {
@@ -136,9 +164,9 @@ app.post('/portfolio', (req, res) => {
     });
 });
 
+// POST request to add a transaction
 app.post('/add_transaction', (req, res) => {
     console.log("Request Body:", req.body);
-
     const { userId, type, category, amount } = req.body;
     const expenses = type === 'credit' ? -amount : amount;
 
@@ -166,7 +194,6 @@ app.post('/add_transaction', (req, res) => {
     const valuesUpdatePie = [userId, amount]; 
 
     console.log("Inserting transaction:", values);
-
     db.query(query, values, (err, result) => {
         if (err) {
             console.error("Error executing insert query", err);
@@ -198,16 +225,12 @@ app.post('/add_transaction', (req, res) => {
     });
 });
 
-
-
-// PUT requests
+// PUT request to update the portfolio
 app.put('/update_portfolio', (req, res) => {
     console.log("Request Body:", req.body);
-
     const { userId, income, savings } = req.body;
 
     let query, values;
-
     if (income !== undefined && savings !== undefined) {
         query = `
             UPDATE portfolio
@@ -237,7 +260,6 @@ app.put('/update_portfolio', (req, res) => {
     }
 
     console.log("Updating portfolio:", values);
-
     db.query(query, values, (err, result) => {
         if (err) {
             console.error("Error executing query", err);
@@ -249,19 +271,19 @@ app.put('/update_portfolio', (req, res) => {
     });
 });
 
+// PUT request to update user information
 app.put('/update_user', (req, res) => {
     console.log("Request Body:", req.body);
-
-    const { userId, name } = req.body;
+    const { userId, email, name } = req.body;
 
     const query = `
         UPDATE user_info
-        SET fullname = $2
+        SET fullname = $2,
+            email = $3
         WHERE userId = $1
         RETURNING *
     `;
-    const values = [userId, name];
-
+    const values = [userId, name, email];
     console.log("Updating user:", values);
 
     db.query(query, values, (err, result) => {
@@ -275,10 +297,9 @@ app.put('/update_user', (req, res) => {
     });
 });
 
-// DELETE request
+// DELETE request to delete a user
 app.delete('/delete_user', (req, res) => {
     console.log("Request Body:", req.body);
-
     const { userId } = req.body;
 
     const query = `
@@ -287,7 +308,6 @@ app.delete('/delete_user', (req, res) => {
         RETURNING *
     `;
     const values = [userId];
-
     console.log("Deleting user:", values);
 
     db.query(query, values, (err, result) => {
