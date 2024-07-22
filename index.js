@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import axios from "axios";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { name } from "ejs";
 
 // Get the current file name and directory
 const __filename = fileURLToPath(import.meta.url);
@@ -39,8 +40,8 @@ app.post('/register', async (req, res) => {
             password: password,
             email: email
         });
-
-        res.redirect('/login');
+        res.cookie('userId', userId);
+        res.render('register.ejs', {name: fullName});
     } catch (error) {
         console.error("Error registering user:", error.message || error);
         res.status(500).send("Error registering user");
@@ -113,6 +114,20 @@ app.post('/add_transaction', async (req, res) => {
 });
 
 // Route for updating user portfolio
+
+
+app.post('/portfolio', async (req, res) => {
+    try {
+        const { income, savings } = req.body;
+        const userId = req.cookies.userId;
+        await axios.post(`${apiUrl}/portfolio`, { userId, income, savings });
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error("Error updating portfolio:", error.message || error);
+        res.status(500).send("Error updating portfolio");
+    }
+});
+
 app.post('/update_portfolio', async (req, res) => {
     try {
         const { fullincome, savings } = req.body;

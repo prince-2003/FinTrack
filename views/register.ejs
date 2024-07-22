@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style_register.css">
+    <title>Sign In/Sign Up Page | FinTrack</title>
+
+    <!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="signup-form" id="signupForm">
+            <% if (locals.name) { %>
+                 <h1>Hi, <%= name %></h1>
+              <% } else { %>
+                <h1>Hi, USER_101</h1>
+              <% } %>
+           
+            <div class="form-message-container">
+                <span>Setup your Dashboard</span>
+            </div>
+
+            <form method="post" action="/portfolio">
+                <div>
+                <label for="income">Your Montly Income</label>
+                <input type="text" placeholder="Your full income excluding taxes*" name="income" required></div>
+                <div>
+                <label for="savings">Savings</label>
+                <input type="text" placeholder="How much you want to save monthly?" name="savings" required></div>
+                <button>Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
