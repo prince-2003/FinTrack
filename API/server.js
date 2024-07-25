@@ -5,6 +5,9 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
+import schedule from "node-schedule";
+
+
 
 const saltRounds = 10;
 dotenv.config();
@@ -27,6 +30,44 @@ const port = 3000;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+const archiveAndResetData = async () => {
+    try {
+        // Get all users
+        const usersResult = await db.query("SELECT userId FROM user_info");
+        const users = usersResult.rows;
+
+        for (const user of users) {
+            const { userId } = user;
+
+            // Copy current transactions to archive table
+            await db.query(`
+                INSERT INTO archived_transaction_history (userId, type, category, amount, date)
+                SELECT userId, type, category, amount, date
+                FROM transaction_history
+                WHERE userId = $1;
+            `, [userId]);
+
+            // Calculate remaining balance
+            const balanceResult = await db.query(`
+                SELECT balance FROM portfolio WHERE userId = $1;
+            `, [userId]);
+            const balance = balanceResult.rows[0]?.balance || 0;
+
+            // Reset current month's transactions and expenses
+            await db.query("DELETE FROM transaction_history WHERE userId = $1;", [userId]);
+            await db.query("UPDATE portfolio SET expense_balance = 0, expense_pie = 0 WHERE userId = $1;", [userId]);
+
+            // Roll over remaining balance to new month
+            await db.query("UPDATE portfolio SET balance = $1 WHERE userId = $2;", [balance, userId]);
+        }
+
+        console.log("Monthly reset and archiving completed successfully.");
+    } catch (err) {
+        console.error("Error during monthly reset and archiving:", err);
+    }
+};
+
+schedule.scheduleJob('0 0 1 * *', archiveAndResetData);
 
 // Connect to database
 db.connect()
