@@ -76,13 +76,13 @@ The dashboard provides an overview of your financial health, showing key metrics
 
 You can add income or expense transactions from the 'Add Transaction' section. Categorize each transaction to better organize your finances.
 
-### PIE Chart
+### Pie Chart
 
 Generate pie chart to visulaise your expense section. Filter by category to get insights into your spending and saving habits.
 
-### Investment Tracking
+### Transaction History
 
-Use the 'Investments' section to manage your investment portfolio. Add details of each investment, monitor performance, and calculate returns.
+Use the 'Transaction History' section to view your transactions. Add details of each transactions and monitor your expenses.
 
 ### Saving Goals
 
@@ -116,13 +116,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or feedback, feel free to reach out to the project maintainer:
 
-- **Name:** Prince-2003
-- **Email:** [your-email@example.com](mailto:your-email@example.com)
+- **Name:** Prince
+- **Email:** [pr28102003@gmail.com](mailto:pr28102003@gmail.com)
 
 ## Screenshots
-
-![Dashboard Screenshot](link-to-screenshot1)
-![Reports Screenshot](link-to-screenshot2)
+![Landing Page Screenshot](https://github.com/prince-2003/FinTrack/blob/main/Screenshots/Landing.jpeg)
+![Login Page Screenshot](https://github.com/prince-2003/FinTrack/blob/main/Screenshots/login.jpeg)
+![Dashboard Screenshot](https://github.com/prince-2003/FinTrack/blob/main/Screenshots/Dashboard.jpeg)
+![Settings Screenshot](https://github.com/prince-2003/FinTrack/blob/main/Screenshots/Setting.jpeg)
 
 ## Future Plans
 
