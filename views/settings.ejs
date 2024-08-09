@@ -1,0 +1,85 @@
+<%- include('header.ejs') %>
+<section id="Settings" class="container">
+  <h1 class="heading">Dashboard</h1>
+  <hr />
+  <h2 class="h_setting txt">Settings</h2>
+  
+  <div class="profile_photo">
+    <img src="/src/profile.svg" alt="profile" />
+    <div class="profile_info">
+      <% if (locals.name && locals.user) { %>
+        <h2 class="h_name"><%= name %></h2>
+        <h3 class="h_username">@<%= user %></h3>
+      <% } else { %>
+        <h2 class="h_name">testname</h2>
+        <h3 class="h_username">@testuserid</h3>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="user-profile">
+    <h3>User Profile</h3>
+    <hr />
+    <form class="form-group" method="post" action="/update_user">
+      <label for="fullname">
+        Full Name<br />
+        <div>This will be displayed on your profile</div>
+      </label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        placeholder="Enter Your Full Name"
+        title="Enter your full name as you would like it to appear on your profile"
+      />
+      <label for="email">
+        Email<br />
+        <div>This will be used to authenticate the user</div>
+      </label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        placeholder="Enter Your email"
+        required
+        title="Choose Your email for Logging in"
+      />
+      <div class="form-actions">
+        <button type="submit" class="save">Save Changes</button>
+        <button type="reset" class="cancel" >Cancel</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="portfolio">
+    <h3>Portfolio</h3>
+    <hr />
+    <form class="form-group" method="post" action="/update_portfolio" >
+      <label for="fullincome">
+        Full Income<br />
+        <div>Your full income excluding taxes*</div>
+      </label>
+      <input
+        type="text"
+        id="fullincome"
+        name="fullincome"
+        placeholder="Your full income excluding taxes*"
+      />
+      <label for="savings">
+        Savings<br />
+        <div>How much you want to save monthly?</div>
+      </label>
+      <input
+        type="text"
+        id="savings"
+        name="savings"
+        placeholder="How much you want to save monthly?"
+      />
+      <div class="form-actions">
+        <button type="submit" class="save">Save Changes</button>
+        <button type="reset" class="cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+</section>
+<%- include('footer.ejs') %>

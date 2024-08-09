@@ -1,0 +1,195 @@
+<%- include('header.ejs') %> 
+<section id="Overview">
+    <h1 class="heading">Dashboard</h1>
+    <hr>
+    <% if (locals.fullname) { %>
+        <h1 class="overview1">Hi, <%= fullname %></h1>
+    <% } else { %>
+        <h1 class="overview1">Hi, USER_101</h1>
+    <% } %>
+    <h1 class="overview_txt">Overview</h1>
+    <div class="overview">
+        <% if (locals.balance && locals.income && locals.expenses && locals.savings) { %>
+            <div class="card balance"> 
+                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+                <br>Balance 
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; <%= balance %></div>
+            </div>
+            <div class="card income"> 
+                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+                <br>Income
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; <%= income %></div>
+            </div>
+            <div class="card expenses"> 
+                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+                <br>Expenses
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; <%= expenses %></div>
+            </div>
+            <div class="card savings"> 
+                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+                <br>Savings
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; <%= savings %></div>
+            </div>
+        <% } else { %>
+            <div class="card balance"> 
+                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+                <br>Balance 
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; NIL</div>
+            </div>
+            <div class="card income"> 
+                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+                <br>Income
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; NIL</div>
+            </div>
+            <div class="card expenses"> 
+                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+                <br>Expenses
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; NIL</div>
+            </div>
+            <div class="card savings"> 
+                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+                <br>Savings
+                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+                <div class="amount_be">&#8377; NIL</div>
+            </div>
+        <% } %>
+        <div class="lg_card all_expenses">
+            All Expenses
+            <div id="chart"></div> <!-- Initially empty, will be filled with chart or message -->
+            <div id="no-expenses-message" style="display: none;">
+                No expenses till now.
+            </div>
+            <script>
+                function fetchDataAndRenderChart() {
+                    // Retrieve chartData from EJS template
+                    var data = <%- JSON.stringify(chartData) %>;
+        
+                    // Map chartData to categories and seriesData
+                    const categories = data.map(item => item.category);
+                    const seriesData = data.map(item => item.total);
+        
+                    console.log('Categories:', categories);
+                    console.log('Series Data:', seriesData);
+        
+                    if (categories.length === 0) {
+                        // Show the no expenses message
+                        document.getElementById('no-expenses-message').style.display = 'block';
+                        document.getElementById('chart').style.display = 'none'; // Hide the chart container
+                    } else {
+                        // Hide the no expenses message
+                        document.getElementById('no-expenses-message').style.display = 'none';
+                        document.getElementById('chart').style.display = 'block'; // Show the chart container
+        
+                        var options = {
+                            chart: {
+                                type: 'pie',
+                                height: 225
+                            },
+                            labels: categories,
+                            dataLabels: {
+                                enabled: true,
+                                style: {
+                                    colors: ['#fff'],
+                                    fontSize: '10px',
+                                    fontFamily: 'Montserrat, sans-serif'
+                                }
+                            },
+                            stroke: {
+                                show: true,
+                                width: 2,
+                                colors: ['transparent']
+                            },
+                            fill: {
+                                opacity: 1
+                            },
+                            legend: {
+                                labels: {
+                                    colors: '#fff',
+                                    fontSize: '14px',
+                                    fontFamily: 'Montserrat, sans-serif'
+                                }
+                            },
+                            colors: ['#85ec68', '#ff5722', '#2196f3', '#ffc107', '#9c27b0'] // Example colors for pie slices
+                        };
+        
+                        var chart = new ApexCharts(document.querySelector("#chart"), { ...options, series: seriesData });
+                        chart.render();
+                    }
+                }
+        
+                fetchDataAndRenderChart();
+            </script>
+        </div>
+        
+        
+        <div class="large-card transaction">
+            Transaction History
+            <div class="open" style="position: absolute; top: 20px; right: 20px;">+</div>
+            <div class="transactions">
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Transaction</h2>
+                        <form id="transactionForm" method="post" action="/transactions">
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" name="amount" required>
+                            
+                            <label for="type">Type:</label>
+                            <select id="type" name="type" required>
+                                <option value="debit">Debit</option>
+                                <option value="credit">Credit</option>
+                            </select>
+                            
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" required>
+                                <option value="groceries">Groceries</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="rent">Rent</option>
+                                <option value="other">Other</option>
+                            </select>
+                            
+                            <button type="submit">Add Transaction</button>
+                        </form>
+                    </div>
+                </div>
+        
+                <% if (transactions.length > 0) { %>
+                    <div class="table-wrapper">
+                      
+                        <table class="transaction-table">
+                           <thead>
+                            <tr>
+                              <th>Amount</th>
+                              <th>Type</th>
+                              <th>Category</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% transactions.forEach(function(transaction) { %>
+                              <tr>
+                                <td>&#8377; <%= transaction.amount %></td>
+                                <td><%= transaction.type %></td>
+                                <td><%= transaction.category %></td>
+                              </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                <% } else { %>
+                    <p>No transactions found</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('footer.ejs') %>

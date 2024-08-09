@@ -1,0 +1,389 @@
+body {
+  margin: 0;
+  background-color: #001d21;
+  display: flex;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar {
+  width: 247px;
+  height: 100vh;
+  padding: 21px 17.5px 0 25px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #064c4e;
+  position: sticky;
+}
+
+.sidebar .links {
+  margin-top: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sidebar .links a {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  line-height: 47px;
+  width: 204px;
+  height: 47px;
+  border-radius: 10px;
+  color: #405052;
+  text-decoration: none;
+  font-size: 22.615px;
+  font-weight: 500;
+}
+
+.sidebar img {
+  width: 116px;
+  margin-left: 20px;
+}
+
+.sidebar .links a img {
+  width: 27px;
+  margin-right: 9px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background-color: #3ccf4e;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 800;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.heading,
+.overview_txt {
+  color: #405052;
+  font-size: 26.305px;
+  font-weight: 600;
+  padding-left: 26.5px;
+}
+
+.overview_txt {
+  color: #d1d2d2;
+}
+
+.heading {
+  font-size: 29.077px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+  margin: 0;
+}
+
+hr {
+  border: none;
+  width: 1150px;
+  background-color: #064c4e;
+  height: 1px;
+  margin: 0;
+}
+
+.overview {
+  padding-left: 26.5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 19.17px;
+}
+
+.card {
+  border: 1px solid #064c4e;
+  width: 268.222px;
+  height: 191.82px;
+  background: #282f35;
+  color: #e5e6e7;
+  backdrop-filter: blur(35.65px);
+  border-radius: 8.488px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 22.615px;
+  font-weight: 500;
+}
+
+.card img {
+  margin-bottom: 21px;
+}
+
+.card:hover {
+  background-color: #bafc59;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 800;
+}
+
+.large-card,
+.lg_card {
+  border-radius: 16px;
+  background: #282f35;
+  color: #d1d2d2;
+  padding: 20px;
+  font-size: 26.305px;
+  font-weight: 600;
+  position: relative;
+  border: 1px solid #064c4e;
+}
+
+.lg_card {
+  grid-column: span 2;
+  backdrop-filter: blur(21px);
+  text-align: left;
+  margin-right: 20px;
+  height: 260px;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+
+}
+.large-card {
+  grid-column: span 4;
+  text-align: left;
+  height: 260px;
+}
+
+.h_setting,
+.user-profile h3,
+.portfolio h3 {
+  color: #d1d2d2;
+  font-size: 26.305px;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 18px;
+  margin-left: 26.5px;
+  margin-bottom: 11px;
+}
+
+.user-profile hr,
+.portfolio hr {
+  margin-left: 26.5px;
+  width: 1097px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  margin-top: 10px;
+  padding-left: 26.5px;
+  color: #d1d2d2;
+  row-gap: 46px;
+  width: 1080px;
+}
+
+.form-group label {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.form-group label div {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.form-group input {
+  width: 608px;
+  height: 47px;
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #064c4e;
+  color: #d1d2d2;
+}
+
+.form-group input::placeholder {
+  padding-left: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: right;
+  gap: 38px;
+  grid-column: 2;
+}
+
+.form-actions button {
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+  background: none;
+  border: 1px solid #85ec68;
+  font-size: 19px;
+  font-weight: 600;
+  color: #85ec68;
+}
+
+.form-actions button:hover {
+  background-color: #85ec68;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 600;
+}
+
+.profile_photo {
+  display: flex;
+  margin-top: 18px;
+  padding-left: 26.5px;
+  color: #d1d2d2;
+  gap: 27px;
+  margin-bottom: 61px;
+  align-items: center;
+}
+
+.h_name{
+  font-weight: 600;
+  margin: 0;
+}
+.h_username {
+  margin: 0;
+  font-weight: 300;
+}
+
+.amount_be{
+font-family: "Montserrat", sans-serif;
+font-size: 30.734px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  
+}
+
+.modal-content {
+  background: #282f35;
+  backdrop-filter: blur(25.65px);
+  margin: 15% auto; /* 15% from the top and centered */
+  width: 80%;
+  height: 25%; 
+  border-radius: 16px;
+}
+.modal-content h2, 
+  .modal-content span {
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top:40px;
+  margin-bottom: 25px;
+  
+}
+.modal-content form {
+  display: flex;
+  padding-left: 20px;
+  gap: 18px;
+}
+.modal-content form select, .modal-content form input {
+  background: none;
+  border-radius: 10px;
+  border: 1px solid #064c4e;
+  color: #d1d2d2;
+}
+.modal-content form select {
+  width: 150px;
+  height: 47px;
+}
+.modal-content form button {
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+  background: none;
+  border: 1px solid #85ec68;
+  font-size: 19px;
+  font-weight: 600;
+  color: #85ec68;
+}
+
+.modal-content form button:hover {
+  background-color: #85ec68;
+  color: #002226;
+  font-size: 19.95px;
+  font-weight: 600;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.open:hover, .open:focus, .close:hover,
+.close:focus {
+  color: #85ec68;
+  text-decoration: none;
+  cursor: pointer;
+}
+.edit:hover, .edit:focus {
+  color: #002226;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.overview1{
+  color: #d1d2d2;
+  font-size: 40px;
+  font-weight: 800;
+  padding-left: 26.5px;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-table thead {
+  position: sticky;
+  top: 0;
+  background: #282f35;
+  backdrop-filter: blur(21px);
+  color: #4b5657;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.transaction-table th, .transaction-table td {
+  padding: 12px 15px;
+  text-align: left;
+  white-space: nowrap; 
+}
+
+.transaction-table th {
+  font-weight: bold;
+}
+
+.transaction-table tbody tr:hover {
+  background-color: #85ec68;
+  color: #002226;
+  border-radius: 10px;
+}
+
+/* Wrapper for vertical scrolling without scrollbar */
+.table-wrapper {
+  max-height: 250px; 
+  overflow-y: scroll; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+
+.table-wrapper::-webkit-scrollbar { 
+  display: none;  
+}
+
