@@ -1,4 +1,5 @@
 # FinTrack
+![FinTrack Logo]([https://raw.githubusercontent.com/username/repository/branch/path/to/logo.png](https://github.com/prince-2003/FinTrack/blob/main/public/src/logo.svg))
 
 ## Overview
 
