@@ -10,6 +10,7 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "fluid-tailwind": "^1.0.3",
     "node-schedule": "^2.1.1",
     "nodemon": "^3.1.4",
     "passport": "^0.7.0",
@@ -23,9 +24,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build:css": "npx tailwindcss -i ./public/input.css -o ./public/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
 }
