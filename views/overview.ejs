@@ -1,66 +1,66 @@
 <%- include('header.ejs') %> 
-<section id="Overview">
-    <h1 class="heading">Dashboard</h1>
-    <hr>
+<section id="Overview" class="basis-4/5">
+    <h1 class="heading text-[#405052] font-[600] font-[Inter] lg:text-[2rem] pl-6 ">Dashboard</h1>
+    <hr class="border-[#064c4e]">
     <% if (locals.fullname) { %>
-        <h1 class="overview1">Hi, <%= fullname %></h1>
+        <h1 class="overview1 text-[#d1d2d2] font-[Inter] font-[800] text-[2.5rem] pl-6">Hi, <%= fullname %></h1>
     <% } else { %>
-        <h1 class="overview1">Hi, USER_101</h1>
+        <h1 class="overview1 text-[#d1d2d2] font-[Inter] font-[800] text-[2.5rem] pl-6">Hi, USER_101</h1>
     <% } %>
-    <h1 class="overview_txt">Overview</h1>
-    <div class="overview">
+    <h1 class="overview_txt text-[#405052] font-[600] pl-6 text-[2.5rem] font-[Inter]">Overview</h1>
+    <div class="overview mx-4 grid grid-cols-4 gap-3">
         <% if (locals.balance && locals.income && locals.expenses && locals.savings) { %>
-            <div class="card balance"> 
-                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+            <div class="card balance border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter] "> 
+                <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
                 <br>Balance 
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; <%= balance %></div>
             </div>
-            <div class="card income"> 
-                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+            <div class="card border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+                <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
                 <br>Income
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; <%= income %></div>
             </div>
-            <div class="card expenses"> 
-                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+            <div class="card expenses border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+                <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
                 <br>Expenses
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; <%= expenses %></div>
             </div>
-            <div class="card savings"> 
-                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+            <div class="card savingsborder border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+                <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
                 <br>Savings
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; <%= savings %></div>
             </div>
         <% } else { %>
-            <div class="card balance"> 
-                <img src="src/Card_Wallet.png" class="card-img" data-hover-img="src/Card_Wallet_bg.png"> 
+            <div class="card balance border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
+                <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
                 <br>Balance 
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; NIL</div>
             </div>
-            <div class="card income"> 
-                <img src="src/Dollar_Coin.png" class="card-img" data-hover-img="src/Dollar_Coin_bg.png">
+            <div class="card income border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
+                <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
                 <br>Income
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; NIL</div>
             </div>
-            <div class="card expenses"> 
-                <img src="src/Paycheque.png" class="card-img" data-hover-img="src/Paycheque_bg.png">
+            <div class="card expenses border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
+                <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
                 <br>Expenses
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; NIL</div>
             </div>
-            <div class="card savings"> 
-                <img src="src/Money_Box.png" class="card-img" data-hover-img="src/Money_Box_bg.png">
+            <div class="card savings border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
+                <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
                 <br>Savings
                 <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
                 <div class="amount_be">&#8377; NIL</div>
             </div>
         <% } %>
-        <div class="lg_card all_expenses">
+        <div class="lg_card all_expenses col-span-2">
             All Expenses
             <div id="chart"></div> <!-- Initially empty, will be filled with chart or message -->
             <div id="no-expenses-message" style="display: none;">
@@ -129,7 +129,7 @@
         </div>
         
         
-        <div class="large-card transaction">
+        <div class="large-card transaction col-span-4">
             Transaction History
             <div class="open" style="position: absolute; top: 20px; right: 20px;">+</div>
             <div class="transactions">
@@ -161,35 +161,38 @@
                         </form>
                     </div>
                 </div>
-        
+                
                 <% if (transactions.length > 0) { %>
-                    <div class="table-wrapper">
-                      
-                        <table class="transaction-table">
-                           <thead>
-                            <tr>
-                              <th>Amount</th>
-                              <th>Type</th>
-                              <th>Category</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <% transactions.forEach(function(transaction) { %>
-                              <tr>
-                                <td>&#8377; <%= transaction.amount %></td>
-                                <td><%= transaction.type %></td>
-                                <td><%= transaction.category %></td>
-                              </tr>
-                            <% }) %>
-                          </tbody>
-                        </table>
+                    <div class="flex flex-col">
+                      <div class="-m-1.5 overflow-x-auto">
+                        <div class="p-1.5 min-w-full inline-block align-middle">
+                          <div class="overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200">
+                              <thead>
+                                <tr>
+                                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Amount</th>
+                                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Type</th>
+                                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Category</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody class="divide-y divide-gray-200">
+                                <% transactions.forEach(function(transaction) { %>
+                                <tr class="hover:bg-gray-100">
+                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">&#8377; <%= transaction.amount %></td>
+                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= transaction.type %></td>
+                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= transaction.category %></td>
+                                </tr>
+                                <% }) %>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
-                      
-                <% } else { %>
+                    </div>
+                    <% } else { %>
                     <p>No transactions found</p>
-                <% } %>
-            </div>
-        </div>
-    </div>
+                    <% } %>
+                    
 </section>
 <%- include('footer.ejs') %>
