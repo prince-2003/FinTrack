@@ -10,14 +10,14 @@ $(document).ready(function() {
     }
     
     $('#logout-link').on('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
+        event.preventDefault();
       
         $.ajax({
           url: '/logout',
           type: 'POST',
           success: function(response) {
             if (response.success) {
-              window.location.href = '/login'; // Redirect to the login page
+              window.location.href = '/login'; 
             }
           },
           error: function(xhr, status, error) {
