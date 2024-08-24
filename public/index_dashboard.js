@@ -29,19 +29,27 @@ $(document).ready(function() {
       
     
 
-    // Handle sidebar link hover and active state
+    
     $('section').each(function() {
         var sectionId = $(this).attr('id');
         var topMenuHeight = $(this).outerHeight() + 15;
-        $(".sidebar").css("height", topMenuHeight);
-    
+
+        
+        var viewportHeight = $(window).height();
+        var sidebarHeight = topMenuHeight < viewportHeight ? viewportHeight : topMenuHeight;
+        console.log('topMenuHeight:', topMenuHeight);
+        console.log('viewportHeight:', viewportHeight);
+
+        
+        $(".sidebar").css("height", sidebarHeight);
+
         $('.links a').each(function() {
             var link = $(this);
             var img = link.find('img');
             var linkText = link.text().trim();
             var originalSrc = img.attr('src');
             var hoverSrc = img.data('hover-img');
-    
+
             link.hover(
                 function() {
                     img.attr('src', hoverSrc);
@@ -52,7 +60,7 @@ $(document).ready(function() {
                     }
                 }
             );
-    
+
             if (linkText === sectionId) {
                 link.addClass('active');
                 img.attr('src', hoverSrc);
@@ -63,7 +71,6 @@ $(document).ready(function() {
         });
     });
 
-    // Handle modal functionality
     var modal = $("#myModal");
     var btn = $(".open");
     var span = $(".close");
@@ -79,8 +86,20 @@ $(document).ready(function() {
             modal.hide();
         }
     });
+    $('#type').change(function() {
+        if ($(this).val() === 'credit') {
+            $('#category').hide().prop('disabled', true);  
+            $('#category-credit').show().prop('disabled', false); 
+        } else {
+            $('#category').show().prop('disabled', false);  
+            $('#category-credit').hide().prop('disabled', true);  
+        }
+    });
 
-    // Handle card hover effect
+    
+    $('#category-credit').prop('disabled', true).hide(); 
+    $('#category').prop('disabled', false).show();  
+
     $('.card').each(function() {
         const img = $(this).find('.card-img');
         const originalSrc = img.attr('src');
