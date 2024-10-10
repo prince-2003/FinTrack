@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style_login.css">
+    <link rel="stylesheet" href="/output.css">
     <title>Sign In/Sign Up Page | FinTrack</title>
 
     <!-- boxicons -->
@@ -12,73 +12,73 @@
 
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstaptic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <div class="login-container">
+<body class="m-0 p-0 flex justify-center items-center bg-[#001d21] h-[100vh] font-[Outfit]">
+    
+    <div class="login-container lg:w-[30%] md:w-[40%]  backdrop-blur-[9px] p-[30px_40px] bg-transparent border-2 border-white/20 rounded-[14px] text-[14px] text-white">
+        
         <div class="login-form" id="loginForm">
-            <h1>Sign In</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-linkedin'></i></a>
+            <a href="/" class="absolute top-[10%] left-[10%] text-white md:text-[15px] lg:text-[24px] transition-colors duration-300 hover:text-[#c2c2c2]">
+                <i class='bx bx-arrow-back'></i>
+            </a>
+            <h1 class="lg:text-[39px] md:text-[30px] font-[800] tracking-[0.5px] text-center">Sign In</h1>
+            <div class="social-icons text-center lg:my-[20px] md:my-[10px]">
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-google-plus '></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-github'></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-linkedin'></i></a>
             </div>
 
-            <div class="form-message-container">
-                <span>Or use your email and password</span>
+            <div class="form-message-container flex flex-col items-center lg:mb-[1rem] md:mb-[0.5rem]">
+                <span class="lg:text-[15px] md:text-[10px]">Or use your email and password</span>
             </div>
             <% if (error) { %>
-                <div class="error-message">
+                <div class="error-message text-red-500 lg:text-[15px] md:text-[10px] md:m-[5px_0] lg:m-[10px_0] text-center">
                     <p><%= error %></p>
                 </div>
             <% } %>
 
-            <form method="post" action="/login">
-                <input type="email" placeholder="Email" name="email" required>
-                <input type="password" placeholder="Password" name="password" required>
-                <button type="submit">Sign In</button>
-                <a href="#">Forgot Your Password?</a>
+            <form class="flex flex-col" method="post" action="/login">
+                <input type="email" class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" placeholder="Email" name="email" required>
+                <input class="w-[100%] m-[10px_0] md:h-[35px] lg:h-[50px] bg-transparent border-2 border-white/20 rounded-[60px] indent-[15px] placeholder:text-white placeholder:indent-[15px] focus:border-transparent" type="password" placeholder="Password" name="password" required>
+                <button class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0]  bg-[#02a152] border-2 border-white/20 rounded-[60px] placeholder:text-white placeholder:indent-[15px] focus:border-transparent transition-colors duration-300 hover:bg-[#45a049]" type="submit">Sign In</button>
+                <a class="text-center underline text-white transition-colors duration-300 hover:no-underline lg:text-[15px] md:text-[10px] " href="#">Forgot Your Password?</a>
             </form>
-            <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+            <p class="lg:text-[15px] md:text-[10px]">Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
         </div>
 
-        <div class="signup-form hidden" id="signupForm">
-            <h1>Create An Account</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-linkedin'></i></a>
+        <div class="signup-form hidden " id="signupForm">
+            <h1 class="lg:text-[39px] md:text-[25px] font-[800] tracking-[0.5px] text-center">Create An Account</h1>
+            <div class="social-icons text-center lg:my-[20px] md:my-[10px]">
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-google-plus'></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-github'></i></a>
+                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-linkedin'></i></a>
             </div>
-            <div class="form-message-container">
+            <div class="form-message-container flex flex-col items-center lg:mb-[1rem] md:mb-[0.5rem]">
                 <span>Or use your email for registration</span>
             </div>
-            <% if (error) { %>
-                <div class="error-message">
-                    <p><%= error %></p>
-                </div>
-            <% } %>
 
-            <form class="register" method="post" action="/register">
+            <form class="register flex-col" method="post" action="/register">
                 <div class="user">
-                    <input type="text" placeholder="Name" name="fullName" required>
-                    <input type="text" placeholder="Userid" name="userId" required>
-                    <input type="email" placeholder="Email" name="email" required>
-                    <input type="password" placeholder="Password" name="password" required>
-                    <button type="button" onclick="showHiddenSection()">Next</button>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="text" placeholder="Name" name="fullName" required>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="text" placeholder="Userid" name="userId" required>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="email" placeholder="Email" name="email" required>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="password" placeholder="Password" name="password" required>
+                    <button class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-[#02a152] border-2 border-white/20 rounded-[60px] placeholder:text-white placeholder:indent-[15px] focus:border-transparent transition-colors duration-300 hover:bg-[#45a049]" type="button" onclick="showHiddenSection()">Next</button>
                 </div>
                 <div class="portfolio hidden">
-                    <label for="income">Your Monthly Income</label>
-                    <input type="text" placeholder="Your full income excluding taxes*" name="income" required>
-                    <label for="savings">Savings</label>
-                    <input type="text" placeholder="How much you want to save monthly?" name="savings" required>
-                    <button type="submit">Submit</button>
+                    <label class="md:text-[15px] lg:text-[20px] font-[800] tracking-[0.5px] text-left mb-0 text-white" for="income">Your Monthly Income</label>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="text" placeholder="Your full income excluding taxes*" name="income" required>
+                    <label class="md:text-[15px] lg:text-[20px] font-[800] tracking-[0.5px] text-left mb-0 text-white" for="savings">Savings</label>
+                    <input class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-transparent border-2 border-white/20 rounded-[60px] placeholder:text-white indent-[15px] placeholder:indent-[15px] focus:border-transparent" type="text" placeholder="How much you want to save monthly?" name="savings" required>
+                    <button class="w-[100%] md:h-[35px] lg:h-[50px] m-[10px_0] bg-[#02a152] border-2 border-white/20 rounded-[60px] placeholder:text-white placeholder:indent-[15px] focus:border-transparent transition-colors duration-300 hover:bg-[#45a049]" type="submit">Submit</button>
                 </div>
             </form>
-            <p>Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+            <p class="lg:text-[15px] md:text-[10px]">Already have an account? <a href="#" id="showLogin">Sign In</a></p>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

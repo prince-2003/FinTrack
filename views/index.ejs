@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/output.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,79 +12,99 @@
     />
     <title>FinTrack</title>
   </head>
-  <body>
-    <section id="header">
-      <div class="navbar_bs">
-        <img class="logo" src="/src/logo.svg" />
-        <div class="links">
-          <a href="#hero">Home</a>
-          <a href="#Features">Features</a>
-          <a href="#Pricing">Pricing</a>
+  <body class="  bg-[#001d21]
+  m-0
+  p-0 ">
+    <section id="header" class="navbar_bs flex flex-1 flex-row mt-[42px] justify-center lg:gap-x-60 md:gap-x-[100px] ">
+        <img class="logo_bs md:scale-[0.6] lg:scale-[1]" src="/src/logo.svg" />
+        <div class="links_bs flex items-center lg:text-[20px] md:text-[15px] gap-[3rem] text-white font-[Montserrat] font-[500]">
+          <a class="hover:text-[#85ec68]" href="#hero ">Home</a>
+          <a class="hover:text-[#85ec68]" href="#Features">Features</a>
+          <a class="hover:text-[#85ec68]" href="#Pricing">Pricing</a>
         </div>
-        <button class="bt login" >LOGIN</button>
-      </div>
+        <button class="bt login border rounded-lg lg:text-[12px] md:text-[8px] font-[800] border-white lg:px-[47px] md:px-[28px] text-white font-[Inter] hover:bg-[#85ec68] hover:text-[#002226] hover:border-transparent " >LOGIN</button>
     </section>
     <section id="hero">
-      <div class="heading_txt">
-        <div class="in txt">INTRO<img class="card" src="/src/card.svg" /></div>
-        <div class="du txt">DUCING</div>
+      <div class="flex justify-center flex-col items-center mt-[50px] space-y-0">
+        <div class="flex justify-center relative top-10">
+          <div class="in txt text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] flex relative z-10">
+            INTRO
+            <img class="card absolute z-1 rotate-[10.35deg] lg:right-[-7rem] md:right-[-6.25rem] md:scale-[0.6] lg:scale-[1] md:-top-[4rem] lg:-top-4" src="/src/card.svg" />
+          </div>
+          <div class="du txt lg:pl-20 md:pl-12 text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] z-20">
+            DUCING
+          </div>
+        </div>
+      
+        <div class="flex justify-center w-full lg:w-auto relative">
+          <div class="fin txt text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat]  col-span-2 text-center relative z-10">
+            FINTRACK
+          </div>
+        </div>
       </div>
-      <div class="fin txt">FINTRACK</div>
-      <div class="description">
-        FinTrack is a cutting-edge web-based Personal Finance Management System,
+      
+        <div class="description flex text-white items-center flex-col text-center mx-auto w-[50%] font-[Montserrat] font-[500] lg:text-[15px] md:text-[12px] "> FinTrack is a cutting-edge web-based Personal Finance Management System,
         meticulously crafted to help you manage your finances with ease and
         efficiency. Our platform combines the latest technologies and industry
         best practices to deliver a scalable, secure, and user-friendly
         experience.
+        <button class="bt_gt login border lg:text-[12px] md:text-[8px]  border-[#85ec68] mt-6 font-[800] bg-[#85ec68] text-[#002226]   rounded-lg px-[30px] py-[8px]  font-[Inter] hover:bg-transparent hover:text-white hover:border-white  ">GET STARTED</button>
       </div>
-      <button class="bt_gt login">GET STARTED</button>
-      <div style="position: relative; margin-top: 31px">
-        <div class="sd"></div>
-        <img class="earth" src="/src/earth.png" />
+      
+      <div class="relative mt-8">
+        <div class="sd absolute inset-x-0 mx-auto w-[100%] h-[100%] bg-gradient-to-t from-[#002124] to-transparent z-10"></div>
+        <img class="earth mx-auto w-[95%] relative  " src="/src/earth.png" />
       </div>
+      
     </section>
 
-    <section id="Features" style="padding-top: 150px;">
-      <div class="feature_cards">
-        <div class="fcards"></div>
-        <div class="fcards"></div>
-        <div class="fcards"></div>
-        <div class="fcards"></div>
-        <div class="fcards"></div>
+    <section id="Features" class="lg:mt-[150px] md:mt-[100px]">
+      <div class="feature_cards flex flex-wrap lg:gap-[84px] md:gap-5 justify-center">
+        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"> </div>
+        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
       </div>
-      <div class="qt">
+      
+      <div class="qt text-white font-[Montserrat] font-[600] mx-auto lg:text-[30px] md:text-[20px] text-center mt-[49px]">
         Take Charge of Your Finances: FinTrack - Your Trustworthy Financial
         Companion
       </div>
     </section>
 
     <section id="Pricing" style="padding-top: 150px; padding-bottom: 79.11px; position: relative">
-      <div class="ptxt">The Perfect Plan for Your Needs</div>
-      <div class="ptxt description">
+      <div class="ptxt  text-white font-[Montserrat] font-[600] mx-auto lg:text-[30px] md:text-[20px] text-center mt-[49px]">The Perfect Plan for Your Needs</div>
+      <div class="ptxt description text-white text-center font-[Montserrat]
+      font-[500] lg:text-[15px] md:text-[12px] mt-4">
         Our transparent pricing makes it easy to find a plan that works within
         your financial constraints
       </div>
-      <div class="price_cards">
-        <div class="pcard"></div>
-        <div class="pcard"></div>
-        <div class="pcard"></div>
-      </div>
-      <div class="demo">
-        <div class="demo_txt">Grab it Fast to Get Special Price</div>
-        <button class="book bt_as login">Book Demo Now!</button>
-      </div>
-        <div class="bg" ></div>
-    </section>
-    <section id="footer">
-      <div>
-        <img class="footer_logo" src="/src/logo.svg" />
-        <div style="position: relative; margin-top: 10px;">
-          <div class="fintrack_1">Take Charge of Your Finances: FinTrack </div>
-          <img style="position: absolute; margin-left: 200px;" src="/src/FINTRACK.svg">
-        </div>
-        <div class="copyright"> &#169 2024 All Rights Reserved</div>
+      <div class="price_cards flex flex-wrap lg:gap-[84px] md:gap-5 m-[60px] justify-between">
+        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
       </div>
       
+
+      <div class="demo flex justify-between lg:h-[74px] md:h-[50px] items-center mx-auto w-[80%] bg-gradient-to-br from-[#85ec68]/0 to-[#85ec68]/100 rounded-[36.89px] backdrop-blur-[60px]">
+
+        <div class="demo_txt md:text-[15px] lg:text-[22px] text-white ml-[25px] font-[Montserrat] font-[500] ">Grab it Fast to Get Special Price</div>
+        <button class="book bt_as login border lg:text-[12px] md:text-[8px]  border-[#85ec68] font-[800] bg-[#85ec68] text-[#002226]  rounded-[30px] px-[30px] mr-[25px] py-[8px]  font-[Inter] hover:bg-transparent hover:text-white hover:border-white">Book Demo Now!</button>
+      </div>
+      <div class="w-[100%] h-[75%] border-[19.159px] border-[#002124] shadow-[0_-75px_225px_50px_#384F53] absolute -bottom-[15%] left-1/2 transform -translate-x-1/2 z-[-10] rounded-t-full"></div>
+
+
+    </section>
+    <section id="footer" class="lg:pb-10 md:pb-5 bg-black">
+      <div>
+        <img class="footer_logo md:scale-[0.6] lg:scale-[1] md:p-[44px_0_0_44px] lg:p-[88px_0_0_88px] " src="/src/logo.svg" />
+        <div class="relative md:p-[12px_0_0_44px] lg:p-[44px_0_0_88px]">
+          <div class="fintrack_1 text-white font-[Montserrat] lg:text-[15px] md:text-[12px] absolute md:top-[55%] lg:top-[60%] ">Take Charge of Your Finances: FinTrack </div>
+          <img class="md:scale-[0.6] md:-translate-x-[120px] lg:translate-x-0 lg:scale-[1] " src="/src/FINTRACK.svg">
+        </div>
+        <div class="copyright lg:rounded-[16px] md:rounded-[8px] mx-auto flex justify-start items-center text-[#878787] w-[80%] lg:p-[20px] md:p-[10px] bg-[#5A5F5880] font-[Montserrat] lg:text-[15px] md:text-[12px] lg:mt-10 md:mt-5"> &#169 2024 All Rights Reserved</div>
+      </div>
     </section>
 
     <script

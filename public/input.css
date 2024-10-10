@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+  @apply bg-[#3ccf4e] text-[#002226] font-[800]; 
+}

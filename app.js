@@ -21,8 +21,8 @@
         host: process.env.HOST,
         database: process.env.DATABASE,
         password: process.env.PASSWORD,
-        port: 5432 ,
-        ssl: true,
+        port: process.env.PORT ,
+        
     });
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
