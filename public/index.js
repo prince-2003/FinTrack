@@ -26,7 +26,7 @@ $(document).ready(function() {
 
         if (scroll >= 150) {
             $(".navbar_bs").removeClass("navbar_bs").addClass("navbar_as");
-            $(".logo").removeClass("logo").addClass("logo_as");
+            $(".logo_bs").removeClass("logo_bs").addClass("logo_as");
             $(".links").removeClass("links").addClass("links_as");
             $(".bt").removeClass("bt").addClass("bt_as");
             $("body").css("background-color", "#002124");

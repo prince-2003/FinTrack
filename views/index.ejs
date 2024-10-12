@@ -15,40 +15,63 @@
   <body class="  bg-[#001d21]
   m-0
   p-0 ">
-    <section id="header" class="navbar_bs flex flex-1 flex-row mt-[42px] justify-center lg:gap-x-60 md:gap-x-[100px] ">
-        <img class="logo_bs md:scale-[0.6] lg:scale-[1]" src="/src/logo.svg" />
-        <div class="links_bs flex items-center lg:text-[20px] md:text-[15px] gap-[3rem] text-white font-[Montserrat] font-[500]">
-          <a class="hover:text-[#85ec68]" href="#hero ">Home</a>
-          <a class="hover:text-[#85ec68]" href="#Features">Features</a>
-          <a class="hover:text-[#85ec68]" href="#Pricing">Pricing</a>
-        </div>
-        <button class="bt login border rounded-lg lg:text-[12px] md:text-[8px] font-[800] border-white lg:px-[47px] md:px-[28px] text-white font-[Inter] hover:bg-[#85ec68] hover:text-[#002226] hover:border-transparent " >LOGIN</button>
+    <section id="header">
+        <nav class="hidden md:flex flex-1 flex-row mt-[42px] justify-center lg:gap-x-60 md:gap-x-[100px]">
+          <img class="logo_bs md:scale-[0.6] lg:scale-[1]" src="/src/logo.svg" />
+          <div class="links_bs flex items-center lg:text-[20px] md:text-[15px] gap-[3rem] text-white font-[Montserrat] font-[500]">
+            <a class="hover:text-[#85ec68]" href="#hero">Home</a>
+            <a class="hover:text-[#85ec68]" href="#Features">Features</a>
+            <a class="hover:text-[#85ec68]" href="#Pricing">Pricing</a>
+          </div>
+          <button class="bt login border rounded-lg lg:text-[12px] md:text-[8px] font-[800] border-white lg:px-[47px] md:px-[28px] text-white font-[Inter] hover:bg-[#85ec68] hover:text-[#002226] hover:border-transparent">LOGIN</button>
+        </nav>
+        <nav class="fixed top-0 flex w-full md:hidden flex-row justify-between items-center px-6 py-3 z-50 backdrop-blur-lg">
+          <img class="logo_bs scale-[.8] md:scale-[0.6] lg:scale-[1]" src="/src/logo.svg" />
+          <div id="hamburger" class="space-y-1 cursor-pointer">
+            <div class="w-6 h-1 bg-white"></div>
+            <div class="w-6 h-1 bg-white"></div>
+            <div class="w-6 h-1 bg-white"></div>
+          </div>
+          <div id="mobile-menu" class="hidden z-50 backdrop-blur-3xl absolute top-0 right-0 w-1/2  text-white flex flex-col items-start  gap-y-6 p-6">
+            <div id="close-button" class="self-end cursor-pointer">
+              <div class="w-8 h-1 bg-white rotate-45 translate-y-2 translate-x-2"></div>
+              <div class="w-8 h-1 bg-white -rotate-45 -translate-y-2 -translate-x-2"></div>
+            </div>
+            <a class="hover:text-[#85ec68]" href="#hero">Home</a>
+            <a class="hover:text-[#85ec68]" href="#Features">Features</a>
+            <a class="hover:text-[#85ec68]" href="#Pricing">Pricing</a>
+            <button class="bt login border rounded-lg text-[12px] font-[800] border-white px-[47px] text-white font-[Inter] hover:bg-[#85ec68] hover:text-[#002226] hover:border-transparent">LOGIN</button>
+          </div>
+        </nav>
     </section>
     <section id="hero">
-      <div class="flex justify-center flex-col items-center mt-[50px] space-y-0">
-        <div class="flex justify-center relative top-10">
-          <div class="in txt text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] flex relative z-10">
+      <div class="flex justify-center flex-col gap-6 md:gap-0 items-center mt-[50px] space-y-0">
+        <div class="flex gap-6 md:gap-14 lg:gap-20 justify-center relative top-10">
+          <div class="in txt text-[2.5rem] text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] flex relative z-0">
             INTRO
-            <img class="card absolute z-1 rotate-[10.35deg] lg:right-[-7rem] md:right-[-6.25rem] md:scale-[0.6] lg:scale-[1] md:-top-[4rem] lg:-top-4" src="/src/card.svg" />
+            <img class="card absolute z-1 scale-[.3] -right-[5rem] -top-[5rem] rotate-[10.35deg] lg:right-[-7rem] md:right-[-6.25rem] md:scale-[0.6] lg:scale-[1] md:-top-[4rem] lg:-top-4" src="/src/card.svg" />
           </div>
-          <div class="du txt lg:pl-20 md:pl-12 text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] z-20">
+          <div class="du txt text-[2.5rem]  text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat] z-[2]">
             DUCING
           </div>
         </div>
       
         <div class="flex justify-center w-full lg:w-auto relative">
-          <div class="fin txt text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat]  col-span-2 text-center relative z-10">
+          <div class="fin txt text-[2.5rem] text-white lg:text-[8rem] md:text-[5rem] font-black font-[Montserrat]  col-span-2 text-center relative z-[2]">
             FINTRACK
           </div>
         </div>
       </div>
       
-        <div class="description flex text-white items-center flex-col text-center mx-auto w-[50%] font-[Montserrat] font-[500] lg:text-[15px] md:text-[12px] "> FinTrack is a cutting-edge web-based Personal Finance Management System,
+      <div class="description flex text-white items-center flex-col text-center mx-auto w-[75%] lg:w-[50%] font-[Montserrat] font-[500] text-[10px] sm:text-[12px] md:text-[15px]">
+        FinTrack is a cutting-edge web-based Personal Finance Management System,
         meticulously crafted to help you manage your finances with ease and
         efficiency. Our platform combines the latest technologies and industry
         best practices to deliver a scalable, secure, and user-friendly
         experience.
-        <button class="bt_gt login border lg:text-[12px] md:text-[8px]  border-[#85ec68] mt-6 font-[800] bg-[#85ec68] text-[#002226]   rounded-lg px-[30px] py-[8px]  font-[Inter] hover:bg-transparent hover:text-white hover:border-white  ">GET STARTED</button>
+        <button class="bt_gt login border text-[8px] sm:text-[10px] md:text-[12px] border-[#85ec68] mt-6 font-[800] bg-[#85ec68] text-[#002226] rounded-lg px-[30px] py-[8px] font-[Inter] hover:bg-transparent hover:text-white hover:border-white">
+          GET STARTED
+        </button>
       </div>
       
       <div class="relative mt-8">
@@ -58,14 +81,51 @@
       
     </section>
 
-    <section id="Features" class="lg:mt-[150px] md:mt-[100px]">
-      <div class="feature_cards flex flex-wrap lg:gap-[84px] md:gap-5 justify-center">
-        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"> </div>
-        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
-        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
-        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
-        <div class="fcards  md:h-[100px] basis-1/4 lg:h-[182px] bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+    <section id="Features" class=" mt-[3rem] lg:mt-[150px] md:mt-[6rem]">
+      <div class="hidden md:flex flex-row flex-wrap lg:gap-[84px] md:gap-5 items-center justify-center px-8 gap-4">
+        <div class="fcards h-[30vh] w-[60vw] md:h-[100px] lg:h-[182px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105 "></div>
+        <div class="fcards h-[30vh] w-[60vw] md:h-[100px] lg:h-[182px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105 "></div>
+        <div class="fcards h-[30vh] w-[60vw] md:h-[100px] lg:h-[182px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105 "></div>
+        <div class="fcards h-[30vh] w-[60vw] md:h-[100px] lg:h-[182px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105 "></div>
+        <div class="fcards h-[30vh] w-[60vw] md:h-[100px] lg:h-[182px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[42px] transition-transform duration-300 ease-in-out transform hover:scale-105 "></div>
       </div>
+      <div class="relative w-full overflow-hidden md:hidden">
+        
+        <div id="gallery" class="flex transition-transform duration-300 ease-in-out">
+          
+          <div class="w-full flex-shrink-0 justify-center gap-[10vw] ml-[10vw]">
+            <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 1</div>
+          </div>
+          <div class="w-full flex-shrink-0">
+            <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 2</div>
+          </div>
+          <div class="w-full flex-shrink-0">
+            <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 3</div>
+          </div>
+          <div class="w-full flex-shrink-0">
+            <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 4</div>
+          </div>
+          <div class="w-full flex-shrink-0">
+            <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 5</div>
+          </div>
+        </div>
+        
+        
+        <button id="prevBtn" class="absolute top-1/2 left-[1rem] transform -translate-y-1/2 from-white/20 to-white/0 backdrop-blur-[42px] p-2 rounded-full shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        
+        <button id="nextBtn" class="absolute top-1/2 right-[1rem] transform -translate-y-1/2 from-white/20 to-white/0 backdrop-blur-[42px] p-2 rounded-full shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+      
+    
       
       <div class="qt text-white font-[Montserrat] font-[600] mx-auto lg:text-[30px] md:text-[20px] text-center mt-[49px]">
         Take Charge of Your Finances: FinTrack - Your Trustworthy Financial
@@ -80,11 +140,46 @@
         Our transparent pricing makes it easy to find a plan that works within
         your financial constraints
       </div>
-      <div class="price_cards flex flex-wrap lg:gap-[84px] md:gap-5 m-[60px] justify-between">
-        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
-        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
-        <div class="pcard md:h-[200px] lg:h-[400px] basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105"></div>
+      <div class="price_cards hidden md:flex flex-row flex-wrap lg:gap-[84px] md:gap-5 px-8 gap-4 justify-center items-center">
+        <div class="pcard h-[30vh] w-[60vw] md:h-[200px] lg:h-[400px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105 mx-auto"></div>
+        <div class="pcard h-[30vh] w-[60vw] md:h-[200px] lg:h-[400px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105 mx-auto"></div>
+        <div class="pcard h-[30vh] w-[60vw] md:h-[200px] lg:h-[400px] md:basis-1/4 bg-gradient-to-br from-white/20 to-white/0 rounded-2xl backdrop-blur-[22px] transition-transform duration-300 ease-in-out transform hover:scale-105 mx-auto"></div>
+    </div>
+    <div class="relative w-full overflow-hidden md:hidden">
+        
+      <div id="gallery" class="flex transition-transform duration-300 ease-in-out">
+        
+        <div class="w-full flex-shrink-0 justify-center gap-[10vw] ml-[10vw]">
+          <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 1</div>
+        </div>
+        <div class="w-full flex-shrink-0">
+          <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 2</div>
+        </div>
+        <div class="w-full flex-shrink-0">
+          <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 3</div>
+        </div>
+        <div class="w-full flex-shrink-0">
+          <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 4</div>
+        </div>
+        <div class="w-full flex-shrink-0">
+          <div class="h-[200px] w-[80vw] bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-[42px] flex justify-center items-center rounded-lg">Item 5</div>
+        </div>
       </div>
+      
+      
+      <button id="prevBtn" class="absolute top-1/2 left-[1rem] transform -translate-y-1/2 from-white/20 to-white/0 backdrop-blur-[42px] p-2 rounded-full shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      
+      <button id="nextBtn" class="absolute top-1/2 right-[1rem] transform -translate-y-1/2 from-white/20 to-white/0 backdrop-blur-[42px] p-2 rounded-full shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    
       
 
       <div class="demo flex justify-between lg:h-[74px] md:h-[50px] items-center mx-auto w-[80%] bg-gradient-to-br from-[#85ec68]/0 to-[#85ec68]/100 rounded-[36.89px] backdrop-blur-[60px]">
@@ -92,7 +187,7 @@
         <div class="demo_txt md:text-[15px] lg:text-[22px] text-white ml-[25px] font-[Montserrat] font-[500] ">Grab it Fast to Get Special Price</div>
         <button class="book bt_as login border lg:text-[12px] md:text-[8px]  border-[#85ec68] font-[800] bg-[#85ec68] text-[#002226]  rounded-[30px] px-[30px] mr-[25px] py-[8px]  font-[Inter] hover:bg-transparent hover:text-white hover:border-white">Book Demo Now!</button>
       </div>
-      <div class="w-[100%] h-[75%] border-[19.159px] border-[#002124] shadow-[0_-75px_225px_50px_#384F53] absolute -bottom-[15%] left-1/2 transform -translate-x-1/2 z-[-10] rounded-t-full"></div>
+      <div class="hidden md:block w-[100%] h-[75%] border-[19.159px] border-[#002124] shadow-[0_-75px_225px_50px_#384F53] absolute -bottom-[15%] left-1/2 transform -translate-x-1/2 z-[-10] rounded-t-full"></div>
 
 
     </section>
@@ -113,5 +208,41 @@
       crossorigin="anonymous"
     ></script>
     <script src="index.js"></script>
+    <script>
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+    
+      hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      const gallery = document.getElementById('gallery');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let currentIndex = 0;
+  const totalItems = gallery.children.length;
+
+  // Function to update the position of the gallery
+  function updateGalleryPosition() {
+    const offset = currentIndex * -100;  // Move by 100% for each item
+    gallery.style.transform = `translateX(${offset}vw)`;
+  }
+
+  // Next button click event for infinite traversal
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalItems;  // Loop back to the first item if we reach the last one
+    updateGalleryPosition();
+  });
+
+  // Previous button click event for infinite traversal
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;  // Loop to the last item if we go below 0
+    updateGalleryPosition();
+  });
+
+  document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.add('hidden');
+  });
+    </script>
   </body>
 </html>
