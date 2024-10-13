@@ -1,6 +1,8 @@
 
 ## ![FinTrack Logo](https://github.com/prince-2003/FinTrack/blob/main/public/src/logo.svg)
 
+##Hosted Link: [https://FinTrack.onrender.com](https://fintrack-6zz7.onrender.com/)
+
 ## Overview
 
 FinTrack is a financial tracking and management tool designed to help users monitor their income, expenses, investments, and savings. The application provides an intuitive interface, detailed reports, and powerful analytics to help you take control of your financial health.
@@ -127,7 +129,6 @@ If you have any questions or feedback, feel free to reach out to the project mai
 
 ## Future Plans
 
-- **Mobile App:** Develop a mobile version of FinTrack.
 - **Budgeting:** Add budgeting features to help users plan their finances.
 - **Integration:** Integrate with third-party financial APIs for automatic transaction tracking.
 
