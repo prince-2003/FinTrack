@@ -1,214 +1,210 @@
 <%- include('header.ejs') %> 
-<section id="Overview" class="basis-4/5 ">
-    <h1 class="heading md:text-[1.5rem] text-[#405052] font-[600] font-[Inter] lg:text-[2rem] pl-6 ">Dashboard</h1>
-    <hr class="border-[#064c4e]">
-    <% if (locals.fullname) { %>
-        <h1 class="overview1 md:py-2 lg:py-4 text-[#d1d2d2] font-[Inter] font-[800] md:text-[1.5rem] lg:text-[2.5rem] pl-6">Hi, <%= fullname %></h1>
-    <% } else { %>
-        <h1 class="overview1 text-[#d1d2d2] font-[Inter] font-[800] md:text-[1.5rem] lg:text-[2.5rem] pl-6">Hi, USER_101</h1>
-    <% } %>
-    <h1 class="overview_txt text-[#405052] font-[600] pl-6 md:pb-2 lg:pb-4 lg:text-[2.5rem] font-[Inter]">Overview</h1>
-    <div class="overview mx-4 grid grid-cols-4 gap-3">
-        <% if (locals.balance && locals.income && locals.expenses && locals.savings) { %>
-            <div class="card balance border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter] "> 
-                <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
-                <br>Balance 
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; <%= balance %></div>
-            </div>
-            <div class="card border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
-                <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
-                <br>Income
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; <%= income %></div>
-            </div>
-            <div class="card expenses border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
-                <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
-                <br>Expenses
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; <%= expenses %></div>
-            </div>
-            <div class="card savings border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-borderlg:text-[20px] md:text-[15px]font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
-                <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
-                <br>Savings
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; <%= savings %></div>
-            </div>
-        <% } else { %>
-            <div class="card balance border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
-                <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
-                <br>Balance 
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; NIL</div>
-            </div>
-            <div class="card income border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
-                <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
-                <br>Income
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; NIL</div>
-            </div>
-            <div class="card expenses border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
-                <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
-                <br>Expenses
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; NIL</div>
-            </div>
-            <div class="card savings border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter]lg:text-[20px] md:text-[15px]"> 
-                <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
-                <br>Savings
-                <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
-                <div class="amount_be">&#8377; NIL</div>
-            </div>
-        <% } %>
-        <div class="lg_card all_expenses col-span-2 border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium font-[Inter]">
-            All Expenses
-            <div id="chart"></div> 
-            <div id="no-expenses-message" style="display: none;" class="text-gray-500">
-                No expenses till now.
-            </div>
-            <script>
-                function fetchDataAndRenderChart() {
-            
-                    var data = <%- JSON.stringify(chartData) %>;
+<section id="Overview" class="basis-4/5">
+  <h1 class="heading hidden md:block md:text-[1.5rem] text-[#405052] font-[600] font-[Inter] lg:text-[2rem] pl-6">Dashboard</h1>
+  <hr class="hidden md:block border-[#064c4e]">
+  
+  <% if (locals.fullname) { %>
+    <h1 class="overview1 md:py-2 lg:py-4 text-[#d1d2d2] font-[Inter] font-[800] md:text-[1.5rem] lg:text-[2.5rem] pl-6">Hi, <%= fullname %></h1>
+  <% } else { %>
+    <h1 class="overview1 text-[#d1d2d2] font-[Inter] font-[800] md:text-[1.5rem] lg:text-[2.5rem] pl-6">Hi, USER_101</h1>
+  <% } %>
 
-                    const categories = data.map(item => item.category);
-                    const seriesData = data.map(item => item.total);
-        
-                    console.log('Categories:', categories);
-                    console.log('Series Data:', seriesData);
-        
-                    if (categories.length === 0) {
-                      
-                        document.getElementById('no-expenses-message').style.display = 'block';
-                        document.getElementById('chart').style.display = 'none'; 
-                    } else {
-                        
-                        document.getElementById('no-expenses-message').style.display = 'none';
-                        document.getElementById('chart').style.display = 'block'; 
-        
-                        var options = {
-                            chart: {
-                                type: 'pie',
-                                height: 225
-                            },
-                            labels: categories,
-                            dataLabels: {
-                                enabled: true,
-                                style: {
-                                    colors: ['#fff'],
-                                    fontSize: '10px',
-                                    fontFamily: 'Montserrat, sans-serif'
-                                }
-                            },
-                            stroke: {
-                                show: true,
-                                width: 2,
-                                colors: ['transparent']
-                            },
-                            fill: {
-                                opacity: 1
-                            },
-                            legend: {
-                                labels: {
-                                    colors: '#fff',
-                                    fontSize: '14px',
-                                    fontFamily: 'Montserrat, sans-serif'
-                                }
-                            },
-                            colors: ['#85ec68', '#ff5722', '#2196f3', '#ffc107', '#9c27b0'] 
-                        };
-        
-                        var chart = new ApexCharts(document.querySelector("#chart"), { ...options, series: seriesData });
-                        chart.render();
-                    }
+  <h1 class="overview_txt text-[#405052] font-[600] pl-6 md:pb-2 lg:pb-4 lg:text-[2.5rem] font-[Inter]">Overview</h1>
+
+  <div class="overview mx-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+    <% if (locals.balance && locals.income && locals.expenses && locals.savings) { %>
+      <div class="card balance border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+        <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
+        <br>Balance 
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; <%= balance %></div>
+      </div>
+      <div class="card income border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+        <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
+        <br>Income
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; <%= income %></div>
+      </div>
+      <div class="card expenses border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+        <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
+        <br>Expenses
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; <%= expenses %></div>
+      </div>
+      <div class="card savings border border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:font-extrabold font-[Inter]"> 
+        <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
+        <br>Savings
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; <%= savings %></div>
+      </div>
+    <% } else { %>
+      <div class="card balance border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter] lg:text-[20px] md:text-[15px]"> 
+        <img src="src/Card_Wallet.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Card_Wallet_bg.png"> 
+        <br>Balance 
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; NIL</div>
+      </div>
+      <div class="card income border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter] lg:text-[20px] md:text-[15px]"> 
+        <img src="src/Dollar_Coin.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Dollar_Coin_bg.png">
+        <br>Income
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; NIL</div>
+      </div>
+      <div class="card expenses border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter] lg:text-[20px] md:text-[15px]"> 
+        <img src="src/Paycheque.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Paycheque_bg.png">
+        <br>Expenses
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; NIL</div>
+      </div>
+      <div class="card savings border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border text-[20px] font-medium hover:bg-[#bafc59] hover:text-[#002226] hover:text-[25px] hover:font-extrabold font-[Inter] lg:text-[20px] md:text-[15px]"> 
+        <img src="src/Money_Box.png" class="card-img md:scale-[0.6] lg:scale-[1]" data-hover-img="src/Money_Box_bg.png">
+        <br>Savings
+        <div class="edit" style="position: absolute; right: 20px; top: 20px;">&#10247</div>
+        <div class="amount_be">&#8377; NIL</div>
+      </div>
+    <% } %>
+
+    
+    <div class="lg_card all_expenses col-span-2 border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border lg:text-[20px] md:text-[15px] font-medium font-[Inter]">
+      All Expenses
+      <div id="chart"></div> 
+      <div id="no-expenses-message" style="display: none;" class="text-gray-500">No expenses till now.</div>
+      <script>
+        function fetchDataAndRenderChart() {
+          var data = <%- JSON.stringify(chartData) %>;
+          const categories = data.map(item => item.category);
+          const seriesData = data.map(item => item.total);
+
+          if (categories.length === 0) {
+            document.getElementById('no-expenses-message').style.display = 'block';
+            document.getElementById('chart').style.display = 'none';
+          } else {
+            document.getElementById('no-expenses-message').style.display = 'none';
+            document.getElementById('chart').style.display = 'block';
+
+            var options = {
+              chart: { type: 'pie', height: 225 },
+              labels: categories,
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                  fontSize: '10px',
+                  fontFamily: 'Montserrat, sans-serif'
                 }
-        
-                fetchDataAndRenderChart();
-            </script>
+              },
+              stroke: { show: true, width: 2, colors: ['transparent'] },
+              fill: { opacity: 1 },
+              legend: {
+                labels: {
+                  colors: '#fff',
+                  fontSize: '14px',
+                  fontFamily: 'Montserrat, sans-serif'
+                }
+              },
+              colors: ['#85ec68', '#ff5722', '#2196f3', '#ffc107', '#9c27b0'] 
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), { ...options, series: seriesData });
+            chart.render();
+          }
+        }
+        fetchDataAndRenderChart();
+      </script>
+    </div>
+
+  
+    <div class="large-card transaction col-span-2 md:col-span-4 relative p-5 bg-[#282f35] text-[#e5e6e7] lg:text-[20px] md:text-[15px] font-[500] rounded-lg">
+      Transaction History
+      <div class="open absolute top-5 right-5 text-[#e5e6e7] hover:text-[#85ec68] cursor-pointer">+</div>
+      <div class="transactions">
+        <div id="myModal" class="modal fixed inset-0 hidden z-10 overflow-auto bg-black bg-opacity-40">
+          <div class="modal-content bg-[#282f35] backdrop-blur-[25.65px] mx-auto mt-[15%] w-[90%] rounded-[16px] p-5 relative">
+            <span class="close text-[#aaa] float-right text-2xl font-bold cursor-pointer hover:text-[#85ec68]">&times;</span>
+            <h2 class="text-[#e5e6e7] mb-6">Add Transaction</h2>
+            <form id="transactionForm" method="post" action="/transactions" class="flex flex-col md:flex-row gap-4 items-center w-full px-4">
+  
+                <!-- Amount Input -->
+                <div class="flex flex-col gap-2 items-center md:flex-row w-full">
+                  <label for="amount" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Amount:</label>
+                  <input type="number" id="amount" name="amount" required class="bg-transparent border w-full border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 focus:outline-none">
+                </div>
+              
+                <!-- Type Selection -->
+                <div class="flex flex-col md:flex-row gap-2 items-center  w-full">
+                  <label for="type" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Type:</label>
+                  <select id="type" name="type" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none">
+                    <option value="debit">Debit</option>
+                    <option value="credit">Credit</option>
+                  </select>
+                </div>
+              
+                <!-- Category Selection -->
+                <div class="flex flex-col md:flex-row gap-2 items-center w-full">
+                  <label for="category" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Category:</label>
+                  <select id="category" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none">
+                    <option value="groceries">Groceries</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="rent">Rent</option>
+                    <option value="other">Other</option>
+                  </select>
+                  
+                  <!-- Hidden Credit Categories -->
+                  <select id="category-credit" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none hidden" disabled>
+                    <option value="salary">Salary</option>
+                    <option value="investment">Investment</option>
+                    <option value="refund">Refund</option>
+                    <option value="bonus">Bonus</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              
+                <!-- Submit Button -->
+                <div class="w-full">
+                  <button type="submit" class="w-full text-[18px] md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">
+                    Add Transaction
+                  </button>
+                </div>
+              
+              </form>
+              
+          </div>
         </div>
-        
-        
-        <div class="large-card transaction col-span-4 relative p-5 bg-[#282f35] text-[#e5e6e7] lg:text-[20px] md:text-[15px] font-[500] rounded-lg">
-            Transaction History
-            <div class="open absolute top-5 right-5 text-[#e5e6e7] hover:text-[#85ec68] cursor-pointer">+</div>
-            <div class="transactions">
-                <div id="myModal" class="modal fixed inset-0 hidden z-10 overflow-auto bg-black bg-opacity-40">
-                    <div class="modal-content bg-[#282f35] backdrop-blur-[25.65px] mx-auto mt-[15%] w-[90%]  rounded-[16px] p-5 relative">
-                        <span class="close text-[#aaa] float-right text-2xl font-bold cursor-pointer hover:text-[#85ec68]">&times;</span>
-                        <h2 class="text-[#e5e6e7] mb-6">Add Transaction</h2>
-                        <form id="transactionForm" method="post" action="/transactions" class="flex gap-4 items-center">
-                            <label for="amount" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7]">Amount:</label>
-                            <input type="number" id="amount" name="amount" required class="bg-transparent border md:w-[60%] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none">
-                        
-                            <label for="type" class="text-[18px] md:text-[15px] text-[#e5e6e7]">Type:</label>
-                            <select id="type" name="type" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 w-[150px] h-[47px] focus:outline-none">
-                                <option value="debit">Debit</option>
-                                <option value="credit">Credit</option>
-                            </select>
-                        
-                            <label for="category" class="text-[18px] md:text-[15px] text-[#e5e6e7]">Category:</label>
-                        
-                            <!-- Debit Categories -->
-                            <select id="category" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 lg:w-[150px] h-[47px] focus:outline-none">
-                                <option value="groceries">Groceries</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="utilities">Utilities</option>
-                                <option value="transportation">Transportation</option>
-                                <option value="rent">Rent</option>
-                                <option value="other">Other</option>
-                            </select>
-                        
-                            <!-- Credit Categories (Hidden and Disabled by Default) -->
-                            <select id="category-credit" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 lg:w-[150px] h-[47px] focus:outline-none hidden" disabled>
-                                <option value="salary">Salary</option>
-                                <option value="investment">Investment</option>
-                                <option value="refund">Refund</option>
-                                <option value="bonus">Bonus</option>
-                                <option value="other">Other</option>
-                            </select>
-                        
-                            <button type="submit" class="w-full text-[18px] md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">
-                                Add Transaction
-                            </button>
-                        </form>
-                        
-                    </div>
-                </div>
+      </div>
+
+      <% if (transactions.length > 0) { %>
+        <div class="flex flex-col">
+          <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div class="overflow-hidden shadow ring-1 ring-[#064c4e] ring-opacity-5 sm:rounded-lg max-h-[250px] overflow-y-auto">
+                <table class="min-w-full divide-y divide-[#064c4e]">
+                  <thead class="bg-[#282f35] sticky top-0 backdrop-blur-lg">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Amount</th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Type</th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-transparent divide-y divide-[#064c4e]">
+                    <% transactions.forEach(function(transaction) { %>
+                      <tr class="group hover:bg-[#85ec68] transition duration-300 ease-in-out">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white group-hover:text-[#002226]">&#8377; <%= transaction.amount %></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.type %></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.category %></td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
             </div>
-        
-                
-            <% if (transactions.length > 0) { %>
-                <div class="flex flex-col">
-                  <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                      <div class="overflow-hidden shadow ring-1 ring-[#064c4e] ring-opacity-5 sm:rounded-lg max-h-[250px] overflow-y-auto">
-                        <table class="min-w-full divide-y divide-[#064c4e]">
-                          <thead class="bg-[#282f35] sticky top-0 backdrop-blur-lg">
-                            <tr>
-                              <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Amount</th>
-                              <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Type</th>
-                              <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Category</th>
-                            </tr>
-                          </thead>
-                          <tbody class="bg-transparent divide-y divide-[#064c4e]">
-                            <% transactions.forEach(function(transaction) { %>
-                              <tr class="group hover:bg-[#85ec68] transition duration-300 ease-in-out">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white group-hover:text-[#002226]">&#8377; <%= transaction.amount %></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.type %></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.category %></td>
-                              </tr>
-                            <% }) %>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% } else { %>
-                <p class="text-gray-500">No transactions found</p>
-              <% } %>
-              
-              
-                    
+          </div>
+        </div>
+      <% } else { %>
+        <p class="text-gray-500">No transactions found</p>
+      <% } %>
+    </div>
+  </div>
 </section>
 <%- include('footer.ejs') %>

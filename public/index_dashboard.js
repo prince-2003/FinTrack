@@ -9,7 +9,7 @@ $(document).ready(function() {
         alert(error);
     }
     
-    $('#logout-link').on('click', function(event) {
+    $('.logout-link').on('click', function(event) {
         event.preventDefault();
       
         $.ajax({

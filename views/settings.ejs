@@ -1,41 +1,38 @@
 <%- include('header.ejs') %>
 <section id="Settings" class="container basis-4/5">
-  <h1 class="heading text-[#405052] font-[600] font-[Inter] md:md:text-[1rem]  lg:text-[2rem] pl-6">Settings</h1>
-  <hr class="border-[#064c4e]" />
+  <h1 class="heading hidden md:block text-[#405052] font-[600] font-[Inter] text-[1rem] md:text-[1.5rem] lg:text-[2rem] pl-6">Settings</h1>
+  <hr class="hidden md:block border-[#064c4e]" />
   
-  <div class="profile_photo flex text-[#d1d2d2] items-center gap-7 pl-7 mt-4">
-    <img src="/src/profile.svg" class="w-[5rem] lg:w-[8rem]" alt="profile" />
+  <div class="profile_photo flex text-[#d1d2d2] items-center gap-4 md:gap-7 pl-4 md:pl-7 mt-4">
+    <img src="/src/profile.svg" class="w-[4rem] md:w-[5rem] lg:w-[8rem]" alt="profile" />
     <div class="profile_info">
       <% if (locals.name && locals.user) { %>
-        <h2 class="h_name font-[600] "><%= name %></h2>
-        <h3 class="h_username font-[300]">@<%= user %></h3>
-      <% } else { %>
-        <h2 class="h_name font-[600]">testname</h2>
-        <h3 class="h_username font-[300]">@testuserid</h3>
+        <h2 class="h_name font-[600] text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]"><%= name %></h2>
+        <h3 class="h_username font-[300] text-[0.875rem] md:text-[1rem] lg:text-[1.25rem]">@<%= user %></h3>
       <% } %>
     </div>
   </div>
 
-  <div class="user-profile text-[#d1d2d2] font-[600] m-4 ">
-    <h3 class="lg:md:text-[1rem] lg:text-[1.5rem]">User Profile</h3>
-    <hr class="  border-[#064c4e]"/>
-    <form class="form-group mt-4 grid grid-cols-[2fr_4fr]  gap-4 " method="post" action="/update_user">
-      <label for="fullname" class="md:text-[1rem] lg:text-[1.5rem]">
+  <div class="user-profile text-[#d1d2d2] font-[600] m-4">
+    <h3 class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">User Profile</h3>
+    <hr class="border-[#064c4e]" />
+    <form class="form-group mt-4 grid grid-cols-1 md:grid-cols-[2fr_4fr] gap-2 md:gap-4" method="post" action="/update_user">
+      <label for="fullname" class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">
         Full Name<br />
-        <div class="md:text-[.8rem] lg: text-[1rem]  h_username font-[300]">This will be displayed on your profile</div>
+        <div class="text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] h_username font-[300]">This will be displayed on your profile</div>
       </label>
-      <input class="bg-transparent border h-2/3 lg:h-[100%] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
+      <input class="bg-transparent border h-[2rem] md:h-[2.5rem] lg:h-[3rem] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
         type="text"
         id="fullname"
         name="fullname"
         placeholder="Enter Your Full Name"
         title="Enter your full name as you would like it to appear on your profile"
       />
-      <label for="email" class="md:text-[1rem] lg:text-[1.5rem]">
+      <label for="email" class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">
         Email<br />
-        <div class="md:text-[.8rem] lg: text-[1rem]  h_username font-[300]">This will be used to authenticate the user</div>
+        <div class="text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] h_username font-[300]">This will be used to authenticate the user</div>
       </label>
-      <input class="bg-transparent border h-2/3 lg:h-[100%] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
+      <input class="bg-transparent border h-[2rem] md:h-[2.5rem] lg:h-[3rem] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
         type="text"
         id="email"
         name="email"
@@ -43,40 +40,40 @@
         required
         title="Choose Your email for Logging in"
       />
-      <div class="form-actions col-start-2 flex  justify-end gap-4">
-        <button type="submit" class="  save w-[35%] lg:w-[25%]  md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">Save Changes</button>
-        <button type="reset" class="reset w-[35%] lg:w-[25%] text-[18px] md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2" >Cancel</button>
+      <div class="form-actions col-start-1 md:col-start-2 flex justify-between md:justify-end gap-4">
+        <button type="submit" class="save w-[45%] md:w-[35%] lg:w-[25%] text-[0.875rem] md:text-[1rem] lg:text-[1.25rem] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">Save Changes</button>
+        <button type="reset" class="reset w-[45%] md:w-[35%] lg:w-[25%] text-[0.875rem] md:text-[1rem] lg:text-[1.25rem] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">Cancel</button>
       </div>
     </form>
   </div>
   
-  <div class="portfolio  text-[#d1d2d2] font-[600] m-4">
-    <h3 class="lg:md:text-[1rem] lg:text-[1.5rem]">Portfolio</h3>
-    <hr class=" border-[#064c4e]" />
-    <form class="form-group grid grid-cols-[2fr_4fr] mt-4 gap-4" method="post" action="/update_portfolio" >
-      <label for="fullincome" class="md:text-[1rem] lg:text-[1.5rem]">
+  <div class="portfolio text-[#d1d2d2] font-[600] m-4">
+    <h3 class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">Portfolio</h3>
+    <hr class="border-[#064c4e]" />
+    <form class="form-group grid grid-cols-1 md:grid-cols-[2fr_4fr] mt-4 gap-2 md:gap-4" method="post" action="/update_portfolio">
+      <label for="fullincome" class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">
         Full Income<br />
-        <div class="md:text-[.8rem] lg: text-[1rem]  h_username font-[300]">Your full income excluding taxes*</div>
+        <div class="text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] h_username font-[300]">Your full income excluding taxes*</div>
       </label>
-      <input class="bg-transparent border h-2/3 lg:h-[100%] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
+      <input class="bg-transparent border h-[2rem] md:h-[2.5rem] lg:h-[3rem] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
         type="text"
         id="fullincome"
         name="fullincome"
         placeholder="Your full income excluding taxes*"
       />
-      <label for="savings" class="md:text-[1rem] lg:text-[1.5rem]">
+      <label for="savings" class="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">
         Savings<br />
-        <div class=" md:text-[.8rem] lg: text-[1rem] h_username font-[300]">How much you want to save monthly?</div>
+        <div class="text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] h_username font-[300]">How much you want to save monthly?</div>
       </label>
-      <input class="bg-transparent border h-2/3 lg:h-[100%] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
+      <input class="bg-transparent border h-[2rem] md:h-[2.5rem] lg:h-[3rem] border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-1 focus:outline-none"
         type="text"
         id="savings"
         name="savings"
         placeholder="How much you want to save monthly?"
       />
-      <div class="form-actions col-start-2 flex  justify-end gap-4">
-        <button type="submit" class="w-[35%] lg:w-[25%] md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2" class="save">Save Changes</button>
-        <button type="reset" class="w-[35%] lg:w-[25%] lg:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2" class="cancel">Cancel</button>
+      <div class="form-actions col-start-1 md:col-start-2 flex justify-between md:justify-end gap-4">
+        <button type="submit" class="save w-[45%] md:w-[35%] lg:w-[25%] text-[0.875rem] md:text-[1rem] lg:text-[1.25rem] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">Save Changes</button>
+        <button type="reset" class="reset w-[45%] md:w-[35%] lg:w-[25%] text-[0.875rem] md:text-[1rem] lg:text-[1.25rem] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">Cancel</button>
       </div>
     </form>
   </div>
