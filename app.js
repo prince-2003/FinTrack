@@ -61,16 +61,23 @@ async function generateFinancialAdvice(financialData) {
     - Savings Target: ₹${financialData.savings}
     - Expenses by category: ${JSON.stringify(financialData.chartData)}
     - Recent Transactions: ${JSON.stringify(financialData.transactions)}
+    - Last Month Transactions: ${JSON.stringify(financialData.lastmonth)}
 
-    Provide a clear, actionable financial advice for the user in 2-3 sentences. The advice should:
-    1. Identify one or two specific categories where they are overspending, with rupee amounts.
-    2. Suggest how much they should cut back in these categories to meet their savings target.
-    3. Recommend one or two practical steps they can take to better balance their spending and reach their ₹${
-      financialData.savings
-    } savings target.
+    The user's transactions include both credits (income) and debits (expenses). Debits represent their spending, which includes necessary expenses like food, housing, and transportation. Credits represent income inflows. . Please consider both income and expenses when analyzing their financial situation.
+
+    Provide clear, actionable financial advice in 2-3 sentences that:
+    The user has a reasonable level of necessary expenses, such as food, groceries,  rents, and transportation, which are expected for basic living. 
+    They have also set a savings target of ₹${financialData.savings}, which they aim to meet. Please analyze the user's income and expenses, considering that some spending is necessary for livelihood. 
+
+    Provide specific and actionable financial advice in 2-3 sentences. The advice should:
+    1. Identify if any categories are significantly exceeding a reasonable proportion of the user’s income, and mention the rupee amounts if applicable.
+    2. Suggest how much they should adjust their spending in those categories, if needed, while considering the importance of maintaining balance for basic living needs.
+    3. Offer practical steps for adjusting their spending to meet their savings target, without recommending drastic changes that would affect their quality of life.
+    4. Use last month's transactions to understand the user's spending habits and provide advice based on that.
     
-    Be specific and focus on actionable changes.
+    Be specific and focus on proportional spending adjustments, recognizing that some expenses are necessary for a comfortable livelihood.
 `;
+
 
     const response = await model.generateContent(prompt);
     const advice = response.response.candidates[0].content.parts[0].text;
@@ -155,6 +162,7 @@ app.get("/dashboard", async (req, res) => {
             WHERE user_info.userid = $1;
         `;
   const transactionsQuery = `SELECT * FROM transaction_history WHERE userid = $1`;
+  const oldTransactionsQuery = `SELECT * FROM archived_transaction_history WHERE userid = $1`;
   const chartQuery = `
             SELECT 
                 category,
@@ -171,6 +179,7 @@ app.get("/dashboard", async (req, res) => {
         db.query(userInfoQuery, [userId]),
         db.query(transactionsQuery, [userId]),
         db.query(chartQuery, [userId]),
+        db.query(oldTransactionsQuery, [userId]),
       ]
     );
 
@@ -182,6 +191,7 @@ app.get("/dashboard", async (req, res) => {
       expenses: userInfo.expense_pie,
       transactions: transactionsResult.rows,
       chartData: chartResult.rows,
+      lastmonth : oldTransactionsQuery.rows,
     };
 
     const financialAdvice = await generateFinancialAdvice(financialData);
