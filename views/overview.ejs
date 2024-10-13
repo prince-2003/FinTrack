@@ -112,6 +112,10 @@
         fetchDataAndRenderChart();
       </script>
     </div>
+    <div class="lg_card all_expenses col-span-2 border-[#064c4e] bg-[#282f35] text-[#e5e6e7] backdrop-blur-[35.65px] rounded-[8.488px] p-5 box-border font-bold lg:text-[20px] md:text-[15px]  font-[Inter]">
+        AI Suggestions <br>
+       <span class="font-light">  <%= locals.advice %></span>
+    </div>
 
   
     <div class="large-card transaction col-span-2 md:col-span-4 relative p-5 bg-[#282f35] text-[#e5e6e7] lg:text-[20px] md:text-[15px] font-[500] rounded-lg">
@@ -124,13 +128,13 @@
             <h2 class="text-[#e5e6e7] mb-6">Add Transaction</h2>
             <form id="transactionForm" method="post" action="/transactions" class="flex flex-col md:flex-row gap-4 items-center w-full px-4">
   
-                <!-- Amount Input -->
+               
                 <div class="flex flex-col gap-2 items-center md:flex-row w-full">
                   <label for="amount" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Amount:</label>
                   <input type="number" id="amount" name="amount" required class="bg-transparent border w-full border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 focus:outline-none">
                 </div>
               
-                <!-- Type Selection -->
+                
                 <div class="flex flex-col md:flex-row gap-2 items-center  w-full">
                   <label for="type" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Type:</label>
                   <select id="type" name="type" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none">
@@ -139,7 +143,7 @@
                   </select>
                 </div>
               
-                <!-- Category Selection -->
+               
                 <div class="flex flex-col md:flex-row gap-2 items-center w-full">
                   <label for="category" class="lg:text-[18px] md:text-[15px] text-[#e5e6e7] mb-2">Category:</label>
                   <select id="category" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none">
@@ -151,7 +155,7 @@
                     <option value="other">Other</option>
                   </select>
                   
-                  <!-- Hidden Credit Categories -->
+                 
                   <select id="category-credit" name="category" required class="bg-transparent border border-[#064c4e] text-[#d1d2d2] rounded-md px-2 py-2 w-full focus:outline-none hidden" disabled>
                     <option value="salary">Salary</option>
                     <option value="investment">Investment</option>
@@ -161,7 +165,7 @@
                   </select>
                 </div>
               
-                <!-- Submit Button -->
+                
                 <div class="w-full">
                   <button type="submit" class="w-full text-[18px] md:text-[15px] font-inter rounded-md border border-[#85ec68] text-[#85ec68] font-semibold hover:bg-[#85ec68] hover:text-[#002226] transition-colors duration-300 px-4 py-2">
                     Add Transaction
