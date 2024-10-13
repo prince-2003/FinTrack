@@ -1,7 +1,7 @@
 
 ## ![FinTrack Logo](https://github.com/prince-2003/FinTrack/blob/main/public/src/logo.svg)
 
-##Hosted Link: [https://FinTrack.onrender.com](https://fintrack-6zz7.onrender.com/)
+## Hosted Link: [https://FinTrack.onrender.com](https://fintrack-6zz7.onrender.com/)
 
 ## Overview
 
