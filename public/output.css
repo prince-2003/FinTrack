@@ -2261,6 +2261,10 @@ video {
     top: 55%;
   }
 
+  .sm\:m-\[2px_0\] {
+    margin: 2px 0;
+  }
+
   .sm\:-mx-6 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -2275,8 +2279,16 @@ video {
     margin-top: 1.25rem;
   }
 
+  .sm\:mb-\[0\.5rem\] {
+    margin-bottom: 0.5rem;
+  }
+
   .sm\:h-\[50px\] {
     height: 50px;
+  }
+
+  .sm\:h-\[30px\] {
+    height: 30px;
   }
 
   .sm\:w-\[80\%\] {
@@ -2346,6 +2358,10 @@ video {
 
   .sm\:text-\[8px\] {
     font-size: 8px;
+  }
+
+  .sm\:text-\[24px\] {
+    font-size: 24px;
   }
 }
 

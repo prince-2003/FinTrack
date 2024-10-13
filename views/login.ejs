@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/output.css">
     <title>Sign In/Sign Up Page | FinTrack</title>
-
-    <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstaptic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -18,22 +14,15 @@
 
 <body class="m-0 p-0 flex justify-center items-center bg-[#001d21] h-[100vh] font-[Outfit]">
     
-    <div class="login-container lg:w-[30%] md:w-[40%]  backdrop-blur-[9px] p-[30px_40px] bg-transparent border-2 border-white/20 rounded-[14px] text-[14px] text-white">
+    <div class="login-container lg:w-[30%] md:w-[40%] w-[80vw]  backdrop-blur-[9px] p-[30px_40px] bg-transparent border-2 border-white/20 rounded-[14px] text-[14px] text-white">
         
         <div class="login-form" id="loginForm">
             <a href="/" class="absolute top-[10%] left-[10%] text-white md:text-[15px] lg:text-[24px] transition-colors duration-300 hover:text-[#c2c2c2]">
                 <i class='bx bx-arrow-back'></i>
             </a>
             <h1 class="lg:text-[39px] md:text-[30px] font-[800] tracking-[0.5px] text-center">Sign In</h1>
-            <div class="social-icons text-center lg:my-[20px] md:my-[10px]">
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-google-plus '></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out "><i class='bx bxl-linkedin'></i></a>
-            </div>
-
             <div class="form-message-container flex flex-col items-center lg:mb-[1rem] md:mb-[0.5rem]">
-                <span class="lg:text-[15px] md:text-[10px]">Or use your email and password</span>
+                <span class="lg:text-[15px] md:text-[10px]">Use your email and password</span>
             </div>
             <% if (error) { %>
                 <div class="error-message text-red-500 lg:text-[15px] md:text-[10px] md:m-[5px_0] lg:m-[10px_0] text-center">
@@ -52,14 +41,8 @@
 
         <div class="signup-form hidden " id="signupForm">
             <h1 class="lg:text-[39px] md:text-[25px] font-[800] tracking-[0.5px] text-center">Create An Account</h1>
-            <div class="social-icons text-center lg:my-[20px] md:my-[10px]">
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon lg:text-[20px] md:text-[15px] text-white lg:m-[0_10px] md:m-[0_5px] border-2 border-white/20 md:rounded-[12px] lg:rounded-[16px] p-[7px_10px] transition-colors duration-300 ease-in-out"><i class='bx bxl-linkedin'></i></a>
-            </div>
             <div class="form-message-container flex flex-col items-center lg:mb-[1rem] md:mb-[0.5rem]">
-                <span>Or use your email for registration</span>
+                <span>Use your email for registration</span>
             </div>
 
             <form class="register flex-col" method="post" action="/register">
