@@ -21,7 +21,7 @@ const db = new pg.Pool({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: 5432,
-  ssl: true,   
+  ssl: true
 });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,27 +56,37 @@ async function generateFinancialAdvice(financialData) {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = `
     The user has the following financial data:
-    - Balance: ₹${financialData.balance}
+    - Balance: ₹${
+      financialData.balance
+    } (this balance will roll over to the next month if not fully utilized)
     - Income: ₹${financialData.income}
     - Savings Target: ₹${financialData.savings}
     - Expenses by category: ${JSON.stringify(financialData.chartData)}
     - Recent Transactions: ${JSON.stringify(financialData.transactions)}
-    ${financialData.lastmonth ? `- Last Month Transactions: ${JSON.stringify(financialData.lastmonth)}` : ''}
+    ${
+      financialData.lastmonth
+        ? `- Last Month Transactions: ${JSON.stringify(
+            financialData.lastmonth
+          )}`
+        : ""
+    }
 
-    The user's transactions include both credits (income) and debits (expenses). Debits represent their spending, which includes necessary expenses like food, housing, and transportation. Credits represent income inflows. Please consider both income and expenses when analyzing their financial situation.
+    The user's transactions include both credits (income) and debits (expenses). Debits represent their spending, which includes necessary expenses like food, housing, and transportation. Credits represent income inflows. Please consider both income and expenses when analyzing their financial situation, and note that any remaining balance at the end of the month rolls over to the next month.
 
-    The user has a reasonable level of necessary expenses, such as food, groceries, rent, and transportation, which are expected for basic living. They have also set a savings target of ₹${financialData.savings}, which they aim to meet. Analyze the user's income and expenses, assuming some spending is necessary for livelihood.
+    The user has a reasonable level of necessary expenses, such as food, groceries, rent, and transportation, which are expected for basic living. They have also set a savings target of ₹${
+      financialData.savings
+    }, which they aim to meet. Analyze the user's income and expenses, assuming some spending is necessary for livelihood.
 
     Provide specific and actionable financial advice in 2-3 sentences. The advice should:
     1. Identify if any categories are significantly exceeding a reasonable proportion of the user’s income, and mention the rupee amounts if applicable.
     2. Suggest how much they should adjust their spending in those categories, if needed, while considering the importance of maintaining balance for basic living needs.
     3. Offer practical steps for adjusting their spending to meet their savings target, without recommending drastic changes that would affect their quality of life.
     4. If last month's transactions are not available, assume a normal spending ratio based on the user's general expenses and provide advice accordingly.
+    5. Consider that the remaining balance at the end of each month will roll over into the next month.
     
     Be specific and focus on proportional spending adjustments, recognizing that some expenses are necessary for a comfortable livelihood.
+    **Keep the response concise and to the point.** Avoid providing overly detailed explanations.
 `;
-
-
 
     const response = await model.generateContent(prompt);
     const advice = response.response.candidates[0].content.parts[0].text;
@@ -190,7 +200,7 @@ app.get("/dashboard", async (req, res) => {
       expenses: userInfo.expense_pie,
       transactions: transactionsResult.rows,
       chartData: chartResult.rows,
-      lastmonth : oldTransactionsQuery.rows,
+      lastmonth: oldTransactionsQuery.rows,
     };
 
     const financialAdvice = await generateFinancialAdvice(financialData);
