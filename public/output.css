@@ -1058,6 +1058,10 @@ video {
   height: 2rem;
 }
 
+.h-\[70vh\] {
+  height: 70vh;
+}
+
 .max-h-\[250px\] {
   max-height: 250px;
 }
@@ -2623,6 +2627,10 @@ video {
 
   .md\:h-\[2\.5rem\] {
     height: 2.5rem;
+  }
+
+  .md\:h-auto {
+    height: auto;
   }
 
   .md\:w-\[18px\] {

@@ -21,7 +21,7 @@ const db = new pg.Pool({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: 5432,
-  ssl: true,
+  ssl: true,   
 });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,22 +61,21 @@ async function generateFinancialAdvice(financialData) {
     - Savings Target: ₹${financialData.savings}
     - Expenses by category: ${JSON.stringify(financialData.chartData)}
     - Recent Transactions: ${JSON.stringify(financialData.transactions)}
-    - Last Month Transactions: ${JSON.stringify(financialData.lastmonth)}
+    ${financialData.lastmonth ? `- Last Month Transactions: ${JSON.stringify(financialData.lastmonth)}` : ''}
 
-    The user's transactions include both credits (income) and debits (expenses). Debits represent their spending, which includes necessary expenses like food, housing, and transportation. Credits represent income inflows. . Please consider both income and expenses when analyzing their financial situation.
+    The user's transactions include both credits (income) and debits (expenses). Debits represent their spending, which includes necessary expenses like food, housing, and transportation. Credits represent income inflows. Please consider both income and expenses when analyzing their financial situation.
 
-    Provide clear, actionable financial advice in 2-3 sentences that:
-    The user has a reasonable level of necessary expenses, such as food, groceries,  rents, and transportation, which are expected for basic living. 
-    They have also set a savings target of ₹${financialData.savings}, which they aim to meet. Please analyze the user's income and expenses, considering that some spending is necessary for livelihood. 
+    The user has a reasonable level of necessary expenses, such as food, groceries, rent, and transportation, which are expected for basic living. They have also set a savings target of ₹${financialData.savings}, which they aim to meet. Analyze the user's income and expenses, assuming some spending is necessary for livelihood.
 
     Provide specific and actionable financial advice in 2-3 sentences. The advice should:
     1. Identify if any categories are significantly exceeding a reasonable proportion of the user’s income, and mention the rupee amounts if applicable.
     2. Suggest how much they should adjust their spending in those categories, if needed, while considering the importance of maintaining balance for basic living needs.
     3. Offer practical steps for adjusting their spending to meet their savings target, without recommending drastic changes that would affect their quality of life.
-    4. Use last month's transactions to understand the user's spending habits and provide advice based on that.
+    4. If last month's transactions are not available, assume a normal spending ratio based on the user's general expenses and provide advice accordingly.
     
     Be specific and focus on proportional spending adjustments, recognizing that some expenses are necessary for a comfortable livelihood.
 `;
+
 
 
     const response = await model.generateContent(prompt);
