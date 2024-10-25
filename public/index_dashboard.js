@@ -114,4 +114,29 @@ $(document).ready(function() {
             }
         );
     });
+
+    $('.delete-btn').on('click', function() {
+    const transactionId = $(this).data('transaction-id');
+    deleteTransaction(transactionId);
+  });
+  async function deleteTransaction(transactionId) {
+    try {
+      const response = await fetch(`/delete_transaction?transactionId=${transactionId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('Response:', response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        alert('Failed to delete transaction');
+      }
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+      alert('Error deleting transaction');
+    }
+  }
+  
 });

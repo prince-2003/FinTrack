@@ -438,6 +438,44 @@ app.post("/update_portfolio", async (req, res) => {
   }
 });
 
+app.delete("/delete_transaction", async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).redirect("/login");
+  }
+
+  const userId = req.user?.userid;
+  if (!userId) {
+    return res.redirect("/login");
+  }
+
+  const transactionId = req.query.transactionId; // Retrieve from query
+  if (!transactionId) {
+    return res.status(400).send("transactionId is required");
+  }
+
+  const query = `
+      DELETE FROM transaction_history
+      WHERE userid = $1
+      AND transaction_id = $2
+      RETURNING *
+  `;
+  const values = [userId, transactionId];
+
+  try {
+    const result = await db.query(query, values);
+    if (result.rows.length > 0) {
+      console.log("Deleted transaction:", result.rows[0]);
+      res.status(200).json({ success: true, message: "Transaction deleted successfully" });
+    } else {
+      res.status(404).json({ success: false, message: "Transaction not found" });
+    }
+  } catch (err) {
+    console.error("Error deleting transaction:", err);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+
 app.delete("/delete_user", async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).redirect("/login");

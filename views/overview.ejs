@@ -71,7 +71,7 @@
       <div id="no-expenses-message" style="display: none;" class="text-gray-500">No expenses till now.</div>
       <script>
         function fetchDataAndRenderChart() {
-          var data = <%- JSON.stringify(chartData) %>;
+          var data = <%= JSON.stringify(chartData) %>;
           const categories = data.map(item => item.category);
           const seriesData = data.map(item => item.total);
 
@@ -187,17 +187,23 @@
                   <thead class="bg-[#282f35] sticky top-0 backdrop-blur-lg">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Amount</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Type</th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Category</th>
+                      <th scope="col" class="md:px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Type</th>
+                      <th scope="col" class="md:px-6 py-3 text-left text-xs font-bold text-[#4b5657] uppercase">Category</th>
                     </tr>
                   </thead>
                   <tbody class="bg-transparent divide-y divide-[#064c4e]">
                     <% transactions.forEach(function(transaction) { %>
                       <tr class="group hover:bg-[#85ec68] transition duration-300 ease-in-out">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white group-hover:text-[#002226]">&#8377; <%= transaction.amount %></td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.type %></td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.category %></td>
-                      </tr>
+                        <td class="md:px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.type %></td>
+                        <td class="md:px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]"><%= transaction.category %></td>
+                        <td class="md:px-6 py-4 whitespace-nowrap text-sm text-white group-hover:text-[#002226]">
+                          <button class="delete-btn" data-transaction-id="<%= transaction.transaction_id %>">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18" fill="red">
+                              <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                          </button>
+                        </td>
                     <% }) %>
                   </tbody>
                 </table>
