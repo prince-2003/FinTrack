@@ -71,7 +71,7 @@
       <div id="no-expenses-message" style="display: none;" class="text-gray-500">No expenses till now.</div>
       <script>
         function fetchDataAndRenderChart() {
-          var data = <%= JSON.stringify(chartData) %>;
+          var data = <%- JSON.stringify(chartData) %>;
           const categories = data.map(item => item.category);
           const seriesData = data.map(item => item.total);
 
