@@ -405,6 +405,39 @@ app.post("/update_user", async (req, res) => {
   }
 });
 
+app.post("/update_portfolio", async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).redirect("/login");
+  }
+
+  const userId = req.user?.userid;
+  if (!userId) {
+    return res.status(400).send("userId is required");
+  }
+
+  const { fullincome, savings } = req.body;
+  console.log("Income:", fullincome, "Savings:", savings);
+
+  const query = `
+            UPDATE portfolio
+            SET income = $2,
+                savings = $3
+            WHERE userid = $1
+            RETURNING *
+        `;
+  const values = [userId, fullincome, savings];
+
+
+  try {
+    const result = await db.query(query, values);
+    console.log("Updated portfolio:", result.rows[0]);
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error("Error updating portfolio:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.delete("/delete_user", async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).redirect("/login");
