@@ -11,6 +11,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import cors from "cors";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import emailValidator from "email-validator";
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ const db = new pg.Pool({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: 5432,
-  ssl: true
+  ssl: true,
 });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -165,7 +166,9 @@ app.get("/dashboard", async (req, res) => {
                 portfolio.expense_pie,
                 portfolio.balance,
                 portfolio.income,
-                portfolio.savings_amount
+                portfolio.savings_amount,
+                portfolio.needs_advice_update,
+                portfolio.suggestion
             FROM user_info
             JOIN portfolio ON user_info.userid = portfolio.userid
             WHERE user_info.userid = $1;
@@ -183,7 +186,7 @@ app.get("/dashboard", async (req, res) => {
         `;
 
   try {
-    const [userInfoResult, transactionsResult, chartResult] = await Promise.all(
+    const [userInfoResult, transactionsResult, chartResult, oldTransactionsResult] = await Promise.all(
       [
         db.query(userInfoQuery, [userId]),
         db.query(transactionsQuery, [userId]),
@@ -200,10 +203,18 @@ app.get("/dashboard", async (req, res) => {
       expenses: userInfo.expense_pie,
       transactions: transactionsResult.rows,
       chartData: chartResult.rows,
-      lastmonth: oldTransactionsQuery.rows,
+      lastmonth: oldTransactionsResult.rows,
     };
 
-    const financialAdvice = await generateFinancialAdvice(financialData);
+    let financialAdvice = userInfo.suggestion;
+    if (userInfo.needs_advice_update) {
+      financialAdvice = await generateFinancialAdvice(financialData);
+      await db.query(
+        `UPDATE portfolio SET suggestion = $1, needs_advice_update = false WHERE userid = $2`,
+        [financialAdvice, userId]
+      );
+      console.log("Generated financial advice:", financialAdvice);
+    }
 
     res.render("overview.ejs", {
       fullname: userInfo.fullname,
@@ -232,7 +243,6 @@ app.get("/dashboard/settings", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { fullName, userId, email, password, income, savings } = req.body;
-
   try {
     // Check if the email already exists
     const checkResult = await db.query(
@@ -351,10 +361,12 @@ app.post("/transactions", async (req, res) => {
           }
 
           console.log("Updated expense pie:", resultUpdatePie.rows[0]);
+          
           // Redirect to the dashboard after successful transaction
           return res.redirect("/dashboard");
         });
       } else {
+        
         // If it's not a debit, just redirect to the dashboard
         return res.redirect("/dashboard");
       }
