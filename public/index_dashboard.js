@@ -95,9 +95,9 @@ $(document).ready(function() {
                 'Content-Type': 'application/json'
             },
             success: function(response) {
-                // Check for success in response
+                
                 if (response.success) {
-                    window.location.reload(); // Reload page on success
+                    window.location.reload(); 
                 } else {
                     alert('Failed to delete transaction: ' + response.message);
                 }
