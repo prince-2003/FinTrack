@@ -163,7 +163,6 @@ app.get("/dashboard", async (req, res) => {
             SELECT 
                 user_info.userid,
                 user_info.fullname,
-                portfolio.expense_pie,
                 portfolio.balance,
                 portfolio.income,
                 portfolio.savings_amount,
@@ -184,23 +183,38 @@ app.get("/dashboard", async (req, res) => {
             AND type = 'debit'
             GROUP BY category;
         `;
+  
+  const totalExpensesQuery = `
+            SELECT 
+                SUM(amount) AS total_expenses
+            FROM transaction_history
+            WHERE userid = $1
+            AND type = 'debit';
+        `;
 
   try {
-    const [userInfoResult, transactionsResult, chartResult, oldTransactionsResult] = await Promise.all(
-      [
-        db.query(userInfoQuery, [userId]),
-        db.query(transactionsQuery, [userId]),
-        db.query(chartQuery, [userId]),
-        db.query(oldTransactionsQuery, [userId]),
-      ]
-    );
+    const [
+      userInfoResult,
+      transactionsResult,
+      chartResult,
+      oldTransactionsResult,
+      totalExpensesResult
+    ] = await Promise.all([
+      db.query(userInfoQuery, [userId]),
+      db.query(transactionsQuery, [userId]),
+      db.query(chartQuery, [userId]),
+      db.query(oldTransactionsQuery, [userId]),
+      db.query(totalExpensesQuery, [userId]) // Get total expenses
+    ]);
 
     const userInfo = userInfoResult.rows[0];
+    const totalExpenses = totalExpensesResult.rows[0]?.total_expenses || 0; // Get total expenses, default to 0 if null
+
     const financialData = {
       balance: userInfo.balance,
       income: userInfo.income,
       savings: userInfo.savings_amount,
-      expenses: userInfo.expense_pie,
+      expenses: totalExpenses, // Use calculated total expenses
       transactions: transactionsResult.rows,
       chartData: chartResult.rows,
       lastmonth: oldTransactionsResult.rows,
@@ -221,7 +235,7 @@ app.get("/dashboard", async (req, res) => {
       balance: userInfo.balance,
       income: userInfo.income,
       savings: userInfo.savings_amount,
-      expenses: userInfo.expense_pie,
+      expenses: totalExpenses, // Pass total expenses to the view
       transactions: transactionsResult.rows,
       chartData: chartResult.rows,
       advice: financialAdvice,
@@ -231,6 +245,7 @@ app.get("/dashboard", async (req, res) => {
     res.status(500).send("Error fetching data");
   }
 });
+
 
 app.get("/dashboard/settings", (req, res) => {
   req.isAuthenticated()
@@ -323,15 +338,6 @@ app.post("/transactions", async (req, res) => {
         `;
   const valuesUpdate = [userId, expenses];
 
-  // Update the expense_pie in the portfolio table if the transaction is a debit
-  const queryUpdatePie = `
-            UPDATE portfolio
-            SET expense_pie = expense_pie + $2
-            WHERE userId = $1
-            RETURNING *;
-        `;
-  const valuesUpdatePie = [userId, amount];
-
   console.log("Inserting transaction:", values);
 
   // Execute the insert query
@@ -351,28 +357,13 @@ app.post("/transactions", async (req, res) => {
       }
 
       console.log("Updated expenses:", resultUpdate.rows[0]);
-
-      if (type === "debit") {
-        // If it's a debit, update the expense_pie as well
-        db.query(queryUpdatePie, valuesUpdatePie, (err, resultUpdatePie) => {
-          if (err) {
-            console.error("Error executing update pie query", err);
-            return res.redirect("/dashboard?error=Error updating expense pie");
-          }
-
-          console.log("Updated expense pie:", resultUpdatePie.rows[0]);
-          
-          // Redirect to the dashboard after successful transaction
-          return res.redirect("/dashboard");
-        });
-      } else {
-        
-        // If it's not a debit, just redirect to the dashboard
-        return res.redirect("/dashboard");
-      }
+      
+      // Redirect to the dashboard after successful transaction
+      return res.redirect("/dashboard");
     });
   });
 });
+
 
 app.post("/update_user", async (req, res) => {
   if (!req.isAuthenticated()) {
@@ -440,40 +431,70 @@ app.post("/update_portfolio", async (req, res) => {
 
 app.delete("/delete_transaction", async (req, res) => {
   if (!req.isAuthenticated()) {
-    return res.status(401).redirect("/login");
+      return res.status(401).json({ success: false, message: "Unauthorized" });
   }
 
   const userId = req.user?.userid;
   if (!userId) {
-    return res.redirect("/login");
+      return res.status(401).json({ success: false, message: "Unauthorized" });
   }
 
   const transactionId = req.query.transactionId; // Retrieve from query
   if (!transactionId) {
-    return res.status(400).send("transactionId is required");
+      return res.status(400).json({ success: false, message: "transactionId is required" });
   }
 
-  const query = `
-      DELETE FROM transaction_history
-      WHERE userid = $1
-      AND transaction_id = $2
-      RETURNING *
+  // First, retrieve the amount and type of the transaction to adjust the balance
+  const transactionQuery = `
+      SELECT amount, type FROM transaction_history
+      WHERE userid = $1 AND transaction_id = $2
   `;
-  const values = [userId, transactionId];
+  const transactionValues = [userId, transactionId];
 
   try {
-    const result = await db.query(query, values);
-    if (result.rows.length > 0) {
-      console.log("Deleted transaction:", result.rows[0]);
-      res.status(200).json({ success: true, message: "Transaction deleted successfully" });
-    } else {
-      res.status(404).json({ success: false, message: "Transaction not found" });
-    }
+      // Get the transaction details
+      const transactionResult = await db.query(transactionQuery, transactionValues);
+      if (transactionResult.rows.length === 0) {
+          return res.status(404).json({ success: false, message: "Transaction not found" });
+      }
+
+      const { amount, type } = transactionResult.rows[0];
+
+      // Now, delete the transaction
+      const deleteQuery = `
+          DELETE FROM transaction_history
+          WHERE userid = $1 AND transaction_id = $2
+          RETURNING *
+      `;
+      const deleteValues = [userId, transactionId];
+
+      const deleteResult = await db.query(deleteQuery, deleteValues);
+      if (deleteResult.rows.length > 0) {
+          console.log("Deleted transaction:", deleteResult.rows[0]);
+
+          // Adjust the expense_balance in the portfolio table based on the type
+          const adjustAmount = type === "credit" ? amount : -amount; // Credit adds to balance, debit subtracts
+          const updateBalanceQuery = `
+              UPDATE portfolio
+              SET expense_balance = expense_balance + $1
+              WHERE userId = $2
+          `;
+          const updateBalanceValues = [adjustAmount, userId];
+
+          // Update the balance
+          await db.query(updateBalanceQuery, updateBalanceValues);
+
+          return res.status(200).json({ success: true, message: "Transaction deleted successfully" });
+      } else {
+          return res.status(404).json({ success: false, message: "Transaction not found" });
+      }
   } catch (err) {
-    console.error("Error deleting transaction:", err);
-    res.status(500).json({ success: false, error: "Internal Server Error" });
+      console.error("Error deleting transaction:", err);
+      return res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
+
+
 
 
 app.delete("/delete_user", async (req, res) => {
@@ -581,7 +602,7 @@ const archiveAndResetData = async () => {
         userid,
       ]);
       await db.query(
-        "UPDATE portfolio SET expense_balance = 0, expense_pie = 0 WHERE userid = $1;",
+        "UPDATE portfolio SET expense_balance = 0, WHERE userid = $1;",
         [userid]
       );
     }
