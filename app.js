@@ -204,20 +204,20 @@ app.get("/dashboard", async (req, res) => {
       db.query(transactionsQuery, [userId]),
       db.query(chartQuery, [userId]),
       db.query(oldTransactionsQuery, [userId]),
-      db.query(totalExpensesQuery, [userId]) // Get total expenses
+      db.query(totalExpensesQuery, [userId])
     ]);
 
     const userInfo = userInfoResult.rows[0];
-    const totalExpenses = totalExpensesResult.rows[0]?.total_expenses || 0; // Get total expenses, default to 0 if null
+    const totalExpenses = totalExpensesResult.rows[0]?.total_expenses || 0;
 
     const financialData = {
       balance: userInfo.balance,
       income: userInfo.income,
       savings: userInfo.savings_amount,
-      expenses: totalExpenses, // Use calculated total expenses
-      transactions: transactionsResult.rows,
-      chartData: chartResult.rows,
-      lastmonth: oldTransactionsResult.rows,
+      expenses: totalExpenses,
+      transactions: transactionsResult.rows || [], // Default to empty array
+      chartData: chartResult.rows || [], // Default to empty array
+      lastmonth: oldTransactionsResult.rows || [], // Default to empty array
     };
 
     let financialAdvice = userInfo.suggestion;
@@ -227,17 +227,17 @@ app.get("/dashboard", async (req, res) => {
         `UPDATE portfolio SET suggestion = $1, needs_advice_update = false WHERE userid = $2`,
         [financialAdvice, userId]
       );
-      console.log("Generated financial advice:", financialAdvice);
+      
     }
-
+    
     res.render("overview.ejs", {
       fullname: userInfo.fullname,
       balance: userInfo.balance,
       income: userInfo.income,
       savings: userInfo.savings_amount,
-      expenses: totalExpenses, // Pass total expenses to the view
-      transactions: transactionsResult.rows,
-      chartData: chartResult.rows,
+      expenses: totalExpenses,
+      transactions: transactionsResult.rows, // Ensure it's an array
+      chartData: chartResult.rows, // Ensure it's an array
       advice: financialAdvice,
     });
   } catch (err) {
@@ -245,6 +245,7 @@ app.get("/dashboard", async (req, res) => {
     res.status(500).send("Error fetching data");
   }
 });
+
 
 
 app.get("/dashboard/settings", (req, res) => {
@@ -259,7 +260,7 @@ app.get("/dashboard/settings", (req, res) => {
 app.post("/register", async (req, res) => {
   const { fullName, userId, email, password, income, savings } = req.body;
   try {
-    // Check if the email already exists
+   
     const checkResult = await db.query(
       "SELECT * FROM user_info WHERE email = $1",
       [email]
@@ -315,7 +316,7 @@ app.post("/transactions", async (req, res) => {
     return res.status(401).redirect("/login");
   }
   const userId = req.user?.userid;
-  console.log("Request Body:", req.body);
+  
   const { type, category, amount } = req.body;
 
   // Adjust the expense amount based on transaction type
@@ -338,7 +339,7 @@ app.post("/transactions", async (req, res) => {
         `;
   const valuesUpdate = [userId, expenses];
 
-  console.log("Inserting transaction:", values);
+  
 
   // Execute the insert query
   db.query(query, values, (err, result) => {
@@ -347,7 +348,7 @@ app.post("/transactions", async (req, res) => {
       return res.redirect("/dashboard?error=Error inserting transaction");
     }
 
-    console.log("Inserted transaction:", result.rows[0]);
+    
 
     // Execute the update query for expense_balance
     db.query(queryUpdate, valuesUpdate, (err, resultUpdate) => {
@@ -356,7 +357,7 @@ app.post("/transactions", async (req, res) => {
         return res.redirect("/dashboard?error=Error updating expenses");
       }
 
-      console.log("Updated expenses:", resultUpdate.rows[0]);
+      
       
       // Redirect to the dashboard after successful transaction
       return res.redirect("/dashboard");
@@ -388,7 +389,7 @@ app.post("/update_user", async (req, res) => {
 
   try {
     const result = await db.query(query, values);
-    console.log("Updated user:", result.rows[0]);
+    
     res.redirect("/dashboard/settings");
   } catch (err) {
     console.error("Error updating user:", err);
@@ -407,7 +408,7 @@ app.post("/update_portfolio", async (req, res) => {
   }
 
   const { fullincome, savings } = req.body;
-  console.log("Income:", fullincome, "Savings:", savings);
+  
 
   const query = `
             UPDATE portfolio
@@ -421,7 +422,7 @@ app.post("/update_portfolio", async (req, res) => {
 
   try {
     const result = await db.query(query, values);
-    console.log("Updated portfolio:", result.rows[0]);
+    
     res.redirect("/dashboard");
   } catch (err) {
     console.error("Error updating portfolio:", err);
@@ -470,7 +471,7 @@ app.delete("/delete_transaction", async (req, res) => {
 
       const deleteResult = await db.query(deleteQuery, deleteValues);
       if (deleteResult.rows.length > 0) {
-          console.log("Deleted transaction:", deleteResult.rows[0]);
+          
 
           // Adjust the expense_balance in the portfolio table based on the type
           const adjustAmount = type === "credit" ? amount : -amount; // Credit adds to balance, debit subtracts
@@ -515,7 +516,7 @@ app.delete("/delete_user", async (req, res) => {
 
   try {
     const result = await db.query(query, values);
-    console.log("Deleted user:", result.rows[0]);
+    
     res.json(result.rows[0]);
   } catch (err) {
     console.error("Error deleting user:", err);
@@ -607,7 +608,7 @@ const archiveAndResetData = async () => {
       );
     }
 
-    console.log("Monthly reset and archiving completed successfully.");
+    
   } catch (err) {
     console.error("Error during monthly reset and archiving:", err);
   }
