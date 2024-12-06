@@ -8,6 +8,7 @@ package-lock.json
 .nyc_output
 coverage
 
+ca.pem
 # Benchmarking
 benchmarks/graphs
 

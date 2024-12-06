@@ -12,6 +12,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
     "google-auth-library": "^9.14.2",
     "node-schedule": "^2.1.1",
     "nodemon": "^3.1.7",

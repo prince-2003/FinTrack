@@ -11,7 +11,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import cors from "cors";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import emailValidator from "email-validator";
+import fs from "fs";
 
 dotenv.config();
 
@@ -22,7 +22,10 @@ const db = new pg.Pool({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: process.env.PORT,
-  ssl: true,
+  ssl: {
+    ca: fs.readFileSync("./ca.pem").toString(),
+  }
+  
 });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
