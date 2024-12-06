@@ -21,7 +21,7 @@ const db = new pg.Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: 5432,
+  port: process.env.PORT,
   ssl: true,
 });
 const __filename = fileURLToPath(import.meta.url);
