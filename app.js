@@ -21,7 +21,7 @@ const db = new pg.Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.PORT,
+  port: process.env.DBPORT,
   ssl: {
     ca: fs.readFileSync("./ca.pem").toString(),
   }
